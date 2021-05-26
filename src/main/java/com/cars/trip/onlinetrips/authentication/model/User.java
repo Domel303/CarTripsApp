@@ -1,60 +1,56 @@
 package com.cars.trip.onlinetrips.authentication.model;
 
-import org.hibernate.annotations.NaturalId;
+
+import com.cars.trip.onlinetrips.entity.Cars;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-            "username"
+                "USER_NAME"
         }),
         @UniqueConstraint(columnNames = {
-            "email"
+                "EMAIL"
         })
 })
-public class User{
-	@Id
+public class User {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(min=3, max = 50)
+    @Column(name = "FIRST_NAME")
     private String firstname;
-    
-    @NotBlank
-    @Size(min=3, max = 50)
+
+    @Column(name = "LAST_NAME")
     private String lastname;
 
-    @NotBlank
-    @Size(min=3, max = 50)
+    @Column(name = "USER_NAME")
     private String username;
 
-    @NaturalId
-    @NotBlank
-    @Size(max = 50)
-    @Email
+    @Column(name = "EMAIL")
     private String email;
 
-    @NotBlank
-    @Size(min=6, max = 100)
+    @Column(name = "PASSWORD")
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CAR_ID")
+    private Cars car;
+
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles", 
-    	joinColumns = @JoinColumn(name = "user_id"), 
-    	inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User() {}
+    public User() {
+    }
 
-    public User(String firstname, String lastname, 
-    				String username, String email, String password) {
+    public User(String firstname, String lastname,
+                String username, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -85,7 +81,7 @@ public class User{
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
-    
+
     public String getLastname() {
         return lastname;
     }
@@ -108,6 +104,14 @@ public class User{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Cars getCar() {
+        return car;
+    }
+
+    public void setCar(Cars car) {
+        this.car = car;
     }
 
     public Set<Role> getRoles() {

@@ -1,5 +1,7 @@
 package com.cars.trip.onlinetrips.entity;
 
+import com.cars.trip.onlinetrips.authentication.model.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,10 +22,57 @@ public class Cars {
     @Column(name = "ENGINE_POWER_KW")
     private int enginePowerKW;
 
-    @OneToOne(mappedBy = "usersCar")
-    private AppUsers user;
+    @OneToOne(mappedBy = "car")
+    private User user;
 
 
     public Cars() {
+    }
+
+    public Cars(String carBrand, String countryOfOrigin, int enginePowerKW,User user) {
+        this.carBrand = carBrand;
+        this.countryOfOrigin = countryOfOrigin;
+        this.enginePowerKW = enginePowerKW;
+        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCarBrand() {
+        return carBrand;
+    }
+
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
+    }
+
+    public String getCountryOfOrigin() {
+        return countryOfOrigin;
+    }
+
+    public void setCountryOfOrigin(String countryOfOrigin) {
+        this.countryOfOrigin = countryOfOrigin;
+    }
+
+    public int getEnginePowerKW() {
+        return enginePowerKW;
+    }
+
+    public void setEnginePowerKW(int enginePowerKW) {
+        this.enginePowerKW = enginePowerKW;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
