@@ -16,11 +16,14 @@ public class Cars {
     @Column(name = "CAR_BRAND")
     private String carBrand;
 
+    @Column(name="CAR_MODEL")
+    private String carModel;
+
     @Column(name = "COUNTRY_OF_ORIGIN")
     private String countryOfOrigin;
 
     @Column(name = "ENGINE_POWER_KW")
-    private int enginePowerKW;
+    private String enginePowerKW;
 
     @OneToOne(mappedBy = "car")
     private User user;
@@ -29,11 +32,11 @@ public class Cars {
     public Cars() {
     }
 
-    public Cars(String carBrand, String countryOfOrigin, int enginePowerKW,User user) {
+    public Cars(String carBrand, String carModel, String countryOfOrigin, String enginePowerKW) {
         this.carBrand = carBrand;
+        this.carModel = carModel;
         this.countryOfOrigin = countryOfOrigin;
         this.enginePowerKW = enginePowerKW;
-        this.user = user;
     }
 
     public Long getId() {
@@ -60,11 +63,11 @@ public class Cars {
         this.countryOfOrigin = countryOfOrigin;
     }
 
-    public int getEnginePowerKW() {
+    public String getEnginePowerKW() {
         return enginePowerKW;
     }
 
-    public void setEnginePowerKW(int enginePowerKW) {
+    public void setEnginePowerKW(String enginePowerKW) {
         this.enginePowerKW = enginePowerKW;
     }
 
@@ -74,5 +77,13 @@ public class Cars {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
     }
 }

@@ -17,7 +17,7 @@ public class AppEvents {
 
     @ManyToMany
     @JoinTable(
-            name = "SINGED_USERS",
+            name = "SINGED_USERS_INTO_EVENT",
             joinColumns = @JoinColumn(name = "EVENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "USER_ID"))
     private List<User> singedUsers;

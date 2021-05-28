@@ -58,6 +58,15 @@ public class User {
         this.password = password;
     }
 
+    public User(String firstname, String lastname, String username, String email, String password, Cars car) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.car = car;
+    }
+
     public Long getId() {
         return id;
     }

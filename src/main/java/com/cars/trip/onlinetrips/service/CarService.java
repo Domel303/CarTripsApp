@@ -8,6 +8,11 @@ import java.util.List;
 @Service
 public interface CarService {
 
-    void createCar(Cars car);
-    //public abstract List<Cars> getAllCars();
+    public List<Cars> getAllCars();
+
+    void addNewCar(Cars car);
+
+    void deleteCar(Long id);
+
+    void updateCar(Long carId, String carBrand, String carModel, String countryOfOrigin, String enginePowerKw);
 }
