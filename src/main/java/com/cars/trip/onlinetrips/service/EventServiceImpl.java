@@ -1,5 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
+import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.entity.AppEvents;
 import com.cars.trip.onlinetrips.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void addNewEvent(AppEvents event){
+    public void saveEvent(AppEvents event){
         eventRepository.save(event);
     }
 
@@ -82,4 +83,8 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    @Override
+    public AppEvents getEvent(Long id){
+        return eventRepository.findById(id).orElseThrow(() -> new IllegalStateException("Event with id "+ id+ "could not be found"));
+    }
 }

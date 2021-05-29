@@ -45,12 +45,7 @@ public class CarController {
     }
 
     @PutMapping(path = "/update")
-    public void updateCar(
-            @RequestParam(required = true) Long carId,
-            @RequestParam(required = false) String carBrand,
-            @RequestParam(required = false) String carModel,
-            @RequestParam(required = false) String countryOfOrigin,
-            @RequestParam(required = false) String enginePowerKw) {
-        carService.updateCar(carId, carBrand, carModel, countryOfOrigin, enginePowerKw);
+    public void updateCar(@RequestBody Cars car) {
+        carService.updateCar(car.getId(), car.getCarBrand(), car.getCarModel(), car.getCountryOfOrigin(), car.getEnginePowerKW());
     }
 }

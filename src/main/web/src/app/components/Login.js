@@ -1,99 +1,69 @@
-import React, { Component } from 'react';
-import AppNavbar from './AppNavbar';
-import { Container } from 'reactstrap';
-import { Form, Alert, FormGroup, Input, Label, Row, Col } from "reactstrap";
-import {Button} from 'react-bootstrap';
-import AuthenticationService from "../services/AuthenticationService";
-import avatar from '../../avatar.png';
+import React, {useState} from 'react'
+import { useHistory } from "react-router-dom";
+import {Button} from 'react-bootstrap'
+import {Form, Alert, FormGroup, Row, Col} from "react-bootstrap"
+import AuthenticationService from '../services/AuthenticationService'
+import '../App.css';
+import {Input, Label} from "reactstrap";
 
-import '../../App.css';
 
-class Login extends Component {
 
-  constructor(props) {
-    super(props);
+function Login() {
 
-    this.state = {
-      username: "",
-      password: "",
-      error: ""
-    };
-  }
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
 
-  changeHandler = (event) => {
-    let nam = event.target.name;
-    let val = event.target.value;
-    this.setState({[nam]: val});
-  }
+    const history = useHistory();
 
-  doLogin = async (event) => {
-    event.preventDefault();
+    const changeHandler = function (event) {
+        let nam = event.target.name;
+        let val = event.target.value;
 
-    AuthenticationService
-        .signin(this.state.username, 
-                  this.state.password)
-      .then(
-        () => {
-          this.props.history.push('/profile');
-        },
-        error => {
-          console.log("Login fail: error = { " + error.toString() + " }");
-          this.setState({error: "Can not signin successfully ! Please check username/password again"});
-        }
-    );
-  }
+        if (nam === "username") setUsername(val)
+        if (nam === "password") setPassword(val)
+    }
 
-  render() {
-    return ( 
-      <div>
-        <AppNavbar/>
-        <Container fluid>
-          <Row style={{marginTop:"20px"}}>
-          <Col sm="12" md={{ size: 3, offset: 4 }}>
-            <div style={{marginBottom: "10px"}}>
-              <img src={avatar} alt="Avatar" className="avatar center" 
-                style={{width: "50%", height: "auto"}}/>
-            </div>
-            <Form  onSubmit={this.doLogin}>
-              <FormGroup>
-                <Label for="username"><strong>Username</strong></Label>
-                <Input autoFocus 
-                  type="text"
-                  name="username" id="username"
-                  value={this.state.username}
-                  placeholder="Enter Username"
-                  autoComplete="username"
-                  onChange={this.changeHandler}
-                />
-              </FormGroup>
+    const doLogin = async (event) => {
+        event.preventDefault();
 
-              <FormGroup>
-                <Label for="password"><strong>Password</strong></Label>
-                <Input type="password" 
-                  name="password" id="password"
-                  value={this.state.password}
-                  placeholder="Enter Password"
-                  autoComplete="password"
-                  onChange={this.changeHandler}
-                />
-              </FormGroup>
+        AuthenticationService
+            .signin(username,password)
+            .then(
+                () => {
+                    history.push('/profile')
+                    window.location.reload()
+                },
+                error => {
+                    console.log("Login fail: error = { " + error.toString() + " }");
+                    setState( "Can not signin successfully ! Please check username/password again");
+                });
+    }
 
-              <Button type="submit" variant="primary" size="lg" block>
-                Sign In
-              </Button>
-              {
-                this.state.error && (
-                  <Alert color="danger">
-                    {this.state.error}
-                  </Alert>
-                )
-              }
-            </Form>
+    return (
+        <Row style={{marginTop: "20px"}}>
+            <Col sm="12" md={{size: 3}}>
+                <div style={{marginBottom: "10px"}}>
+                </div>
+                <Form onSubmit={doLogin}>
+                    <FormGroup>
+                        <Label for="username"><strong>Username</strong></Label>
+                        <Input autoFocus type="text" name="username" id="username" value={username}
+                               placeholder="Enter Username" autoComplete="username" onChange={changeHandler}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password"><strong>Password</strong></Label>
+                        <Input type="password" name="password" id="password" value={password}
+                               placeholder="Enter Password" autoComplete="password" onChange={changeHandler}/>
+                    </FormGroup>
+
+                    <Button type="submit" name="submitButton" id="submitButton" variant="primary" size="lg" block>Sign In</Button>
+                    {error && (<Alert color="danger">{error}</Alert>)}
+                </Form>
             </Col>
-          </Row>
-        </Container>
-      </div>);
-  }
+        </Row>
+    )
+
 }
 
 export default Login;
