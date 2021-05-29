@@ -1,6 +1,5 @@
 package com.cars.trip.onlinetrips.service;
 
-import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.entity.Cars;
 import com.cars.trip.onlinetrips.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,13 @@ public class CarServiceImpl implements CarService{
     }
 
     @Override
-    public void addNewCar(Cars car) {
+    public List<Cars> getAllUsersCars(String userName) {
+        return carRepository.findAllByUser(userName).orElseThrow(()->new IllegalStateException("User with name" + userName+ "could not be found"));
+    }
 
+    @Override
+    public void addNewCar(Cars car) {
+        carRepository.save(car);
     }
 
     @Override

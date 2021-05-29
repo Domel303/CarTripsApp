@@ -9,6 +9,7 @@ import java.util.List;
 public interface CarService {
 
     public List<Cars> getAllCars();
+    public List<Cars> getAllUsersCars(String userName);
 
     void addNewCar(Cars car);
 

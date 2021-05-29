@@ -1,6 +1,7 @@
 package com.cars.trip.onlinetrips.entity;
 
 import com.cars.trip.onlinetrips.authentication.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -25,7 +26,9 @@ public class Cars {
     @Column(name = "ENGINE_POWER_KW")
     private String enginePowerKW;
 
-    @OneToOne(mappedBy = "car")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "car_user")
+    @JsonIgnore
     private User user;
 
 

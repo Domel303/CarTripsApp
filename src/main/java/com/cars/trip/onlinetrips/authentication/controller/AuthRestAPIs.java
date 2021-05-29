@@ -11,6 +11,7 @@ import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.authentication.repository.RoleRepository;
 import com.cars.trip.onlinetrips.authentication.repository.UserRepository;
 import com.cars.trip.onlinetrips.authentication.security.jwt.JwtProvider;
+import com.cars.trip.onlinetrips.entity.Cars;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -114,4 +116,17 @@ public class AuthRestAPIs {
 
 		return new ResponseEntity<>(new ResponseMessage("User "+ signUpRequest.getFirstname() + " is registered successfully!"), HttpStatus.OK);
 	}
+
+	@PutMapping("/addCar")
+	public void updateUsersCar(
+			@RequestParam String userName,
+			@RequestBody Cars car){
+		User user = userRepository.findByUsername(userName).orElseThrow(()-> new IllegalStateException("User with username:" + userName+ "could not be found"));
+		List<Cars> cars = user.getCar();
+		cars.add(car);
+		user.setCar(cars);
+		userRepository.save(user);
+		System.out.println("cars added");
+	}
+
 }

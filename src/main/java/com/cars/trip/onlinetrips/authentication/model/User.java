@@ -5,6 +5,7 @@ import com.cars.trip.onlinetrips.entity.Cars;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,9 +37,8 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CAR_ID")
-    private Cars car;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Cars> car;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -58,7 +58,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstname, String lastname, String username, String email, String password, Cars car) {
+    public User(String firstname, String lastname, String username, String email, String password, List<Cars> car) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -115,11 +115,11 @@ public class User {
         this.password = password;
     }
 
-    public Cars getCar() {
+    public List<Cars> getCar() {
         return car;
     }
 
-    public void setCar(Cars car) {
+    public void setCar(List<Cars> car) {
         this.car = car;
     }
 
