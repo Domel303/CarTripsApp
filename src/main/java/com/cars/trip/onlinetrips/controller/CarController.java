@@ -24,34 +24,33 @@ public class CarController {
     }
 
     @GetMapping(path = "/allCars")
-    public List<Cars> getAllCars(){
+    public List<Cars> getAllCars() {
         return carService.getAllCars();
     }
-    @GetMapping(path = "/allCars{userName}")
-    public List<Cars> getAllCars(@PathVariable String userName){
-        return carService.getAllUsersCars(userName);
+
+
+    @PostMapping
+    public void createNewCar(@RequestParam String userName, @RequestBody Cars car) {
+        User user = userRepository.findByUsername(userName).orElseThrow(() -> new IllegalStateException("User with name" + userName + "could not be found"));
+        car.setUser(user);
+        carService.addNewCar(car);
+        user.setCar(car);
+        userRepository.save(user);
+        System.out.println("car added with user " + userName);
     }
 
-//    @PostMapping
-//    public void createNewCar(@RequestParam String userName ,@RequestBody Cars car){
-//        User user = userRepository.findByUsername(userName).orElseThrow(()-> new IllegalStateException("User with name"+ userName+ "could not be found"));
-//        car.setUser(user);
-//        carService.addNewCar(car);
-//        System.out.println("car added with user " + userName);
-//    }
-
-    @DeleteMapping(path = "{carId}")
-    public void deleteCar(@PathVariable("carId") Long id){
+    @PostMapping(path = "/delete")
+    public void deleteCar(@RequestParam Long id) {
         carService.deleteCar(id);
     }
 
-    @PutMapping(path = "{carId}")
+    @PutMapping(path = "/update")
     public void updateCar(
-            @PathVariable("carId") Long carId,
+            @RequestParam(required = true) Long carId,
             @RequestParam(required = false) String carBrand,
             @RequestParam(required = false) String carModel,
             @RequestParam(required = false) String countryOfOrigin,
-            @RequestParam(required = false) String enginePowerKw){
-        carService.updateCar(carId,carBrand,carModel,countryOfOrigin,enginePowerKw);
+            @RequestParam(required = false) String enginePowerKw) {
+        carService.updateCar(carId, carBrand, carModel, countryOfOrigin, enginePowerKw);
     }
 }

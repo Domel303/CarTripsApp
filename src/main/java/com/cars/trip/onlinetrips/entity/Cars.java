@@ -10,14 +10,14 @@ import javax.persistence.*;
 public class Cars {
 
     @Id
-    @SequenceGenerator(name="CAR_ID_SEQ", sequenceName = "CAR_ID_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "CAR_ID_SEQ", sequenceName = "CAR_ID_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAR_ID_SEQ")
     private Long id;
 
     @Column(name = "CAR_BRAND")
     private String carBrand;
 
-    @Column(name="CAR_MODEL")
+    @Column(name = "CAR_MODEL")
     private String carModel;
 
     @Column(name = "COUNTRY_OF_ORIGIN")
@@ -26,8 +26,7 @@ public class Cars {
     @Column(name = "ENGINE_POWER_KW")
     private String enginePowerKW;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "car_user")
+    @OneToOne(mappedBy = "car")
     @JsonIgnore
     private User user;
 

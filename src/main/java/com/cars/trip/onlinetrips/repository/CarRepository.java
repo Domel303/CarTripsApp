@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CarRepository extends JpaRepository<Cars,Long> {
+public interface CarRepository extends JpaRepository<Cars, Long> {
 
-    Optional<List<Cars>> findAllByUser(String userName);
 }

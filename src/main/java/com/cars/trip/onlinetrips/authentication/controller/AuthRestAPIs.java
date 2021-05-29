@@ -122,9 +122,7 @@ public class AuthRestAPIs {
 			@RequestParam String userName,
 			@RequestBody Cars car){
 		User user = userRepository.findByUsername(userName).orElseThrow(()-> new IllegalStateException("User with username:" + userName+ "could not be found"));
-		List<Cars> cars = user.getCar();
-		cars.add(car);
-		user.setCar(cars);
+		user.setCar(car);
 		userRepository.save(user);
 		System.out.println("cars added");
 	}

@@ -37,8 +37,8 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Cars> car;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cars car;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -58,7 +58,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstname, String lastname, String username, String email, String password, List<Cars> car) {
+    public User(String firstname, String lastname, String username, String email, String password, Cars car) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -115,11 +115,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Cars> getCar() {
+    public Cars getCar() {
         return car;
     }
 
-    public void setCar(List<Cars> car) {
+    public void setCar(Cars car) {
         this.car = car;
     }
 
