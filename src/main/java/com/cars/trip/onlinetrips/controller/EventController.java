@@ -1,7 +1,9 @@
 package com.cars.trip.onlinetrips.controller;
 
+import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.entity.AppEvents;
 import com.cars.trip.onlinetrips.service.EventService;
+import com.cars.trip.onlinetrips.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +15,13 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
+    private final UserService userService;
 
     @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, UserService userService)
+    {
         this.eventService = eventService;
+        this.userService = userService;
     }
 
     @GetMapping("/allEvents")
@@ -26,7 +31,7 @@ public class EventController {
 
     @PostMapping
     public void createNewEvent(@RequestBody AppEvents event) {
-        eventService.addNewEvent(event);
+        eventService.saveEvent(event);
     }
 
     @PostMapping(path = "/delete")
@@ -47,6 +52,14 @@ public class EventController {
 
     ) {
         eventService.updateEvent(eventId, start,destination,carCulture,distance,duration,dateOfEvent,description);
+    }
+
+    @PostMapping("/register")
+    public void registerIntoEvent(@RequestParam String userName, @RequestParam Long eventId){
+        User user = userService.getUserByUsername(userName);
+        AppEvents event = eventService.getEvent(eventId);
+        event.getSingedUsers().add(user);
+        eventService.saveEvent(event);
     }
 
 }

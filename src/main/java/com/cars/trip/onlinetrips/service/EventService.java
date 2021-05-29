@@ -1,5 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
+import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.entity.AppEvents;
 import org.springframework.stereotype.Service;
 
@@ -10,18 +11,20 @@ import java.util.List;
 public interface EventService {
 
 
-    public List<AppEvents> getAllEvents();
+    List<AppEvents> getAllEvents();
 
-    public  void addNewEvent(AppEvents event);
+    void saveEvent(AppEvents event);
 
-    public void deleteEvent(Long id);
+    void deleteEvent(Long id);
 
-    public void updateEvent(Long eventId,
-                            String start,
-                            String destination,
-                            String carCulture,
-                            String distance,
-                            String duration,
-                            Date dateOfEvent,
-                            String description);
+    void updateEvent(Long eventId,
+                     String start,
+                     String destination,
+                     String carCulture,
+                     String distance,
+                     String duration,
+                     Date dateOfEvent,
+                     String description);
+
+    AppEvents getEvent(Long id);
 }
