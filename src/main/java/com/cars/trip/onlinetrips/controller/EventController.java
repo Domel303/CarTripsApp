@@ -29,21 +29,21 @@ public class EventController {
         eventService.addNewEvent(event);
     }
 
-    @DeleteMapping(path = "{eventId}")
-    public void deleteCar(@PathVariable("carId") Long id) {
+    @PostMapping(path = "/delete")
+    public void deleteCar(@RequestParam Long id) {
         eventService.deleteEvent(id);
     }
 
-    @PutMapping(path = "{eventId}")
+    @PutMapping(path = "/update")
     public void updateEvent(
-            @PathVariable("eventId") Long eventId,
-            @RequestParam String start,
-            @RequestParam String destination,
-            @RequestParam String carCulture,
-            @RequestParam String distance,
-            @RequestParam String duration,
-            @RequestParam Date dateOfEvent,
-            @RequestParam String description
+            @RequestParam(required = true) Long eventId,
+            @RequestParam(required = false) String start,
+            @RequestParam(required = false) String destination,
+            @RequestParam(required = false) String carCulture,
+            @RequestParam(required = false) String distance,
+            @RequestParam(required = false) String duration,
+            @RequestParam(required = false) Date dateOfEvent,
+            @RequestParam(required = false) String description
 
     ) {
         eventService.updateEvent(eventId, start,destination,carCulture,distance,duration,dateOfEvent,description);
