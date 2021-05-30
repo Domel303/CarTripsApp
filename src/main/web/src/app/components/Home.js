@@ -1,33 +1,34 @@
-import React, { Component } from 'react';
-import AppNavbar from './AppNavbar';
-import { Link } from 'react-router-dom';
-import { Button, Container } from 'reactstrap';
-import {Alert} from "react-bootstrap";
+import {Link} from 'react-router-dom';
+import {Button, Container, Alert} from 'react-bootstrap';
+import AuthenticationService from "../services/AuthenticationService";
+import AppNavbar from "./AppNavbar";
 
-class Home extends Component {
+const WEB_NAME = "Car trips"
 
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-  }
-
-  render() {
-    return (
+function Home() {
+  return (
       <div>
-        <AppNavbar/>
+          <AppNavbar />
         <Container fluid>
-          <div style={{marginTop:"20px"}}>
-            <Alert variant="primary">
-              <h2>Reactjs JWT Authentication Application</h2>
-              <Button color="success"><Link to="/signin"><span style={{color:"white"}}>Login</span></Link></Button>
-            </Alert>
-          </div>
+          {
+            !AuthenticationService.isSignedIn() && (<div>
+              <Alert variant="primary">
+                <h2> {WEB_NAME} </h2>
+                <Button color="success"><Link to="/signin"><span
+                    style={{color: "white"}}>Login</span></Link></Button>
+              </Alert>
+            </div>)
+          }
+          {
+            AuthenticationService.isSignedIn() && (
+                <div>
+                  <h1 style={{marginTop: "0.5em"}}>Your experience:</h1>
+                </div>
+            )
+          }
         </Container>
       </div>
-    );
-  }
+  );
 }
 
 export default Home;

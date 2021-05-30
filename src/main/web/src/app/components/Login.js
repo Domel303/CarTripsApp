@@ -1,15 +1,12 @@
 import React, {useState} from 'react'
-import { useHistory } from "react-router-dom";
 import {Button} from 'react-bootstrap'
 import {Form, Alert, FormGroup, Row, Col} from "react-bootstrap"
 import AuthenticationService from '../services/AuthenticationService'
-import '../App.css';
+import '../../App.css';
 import {Input, Label} from "reactstrap";
-
-
+import {useHistory} from "react-router-dom"
 
 function Login() {
-
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
@@ -27,8 +24,7 @@ function Login() {
     const doLogin = async (event) => {
         event.preventDefault();
 
-        AuthenticationService
-            .signin(username,password)
+        AuthenticationService.signIn(username, password)
             .then(
                 () => {
                     history.push('/profile')
@@ -36,7 +32,7 @@ function Login() {
                 },
                 error => {
                     console.log("Login fail: error = { " + error.toString() + " }");
-                    setState( "Can not signin successfully ! Please check username/password again");
+                    setError("Can not signin successfully ! Please check username/password again");
                 });
     }
 
@@ -63,7 +59,6 @@ function Login() {
             </Col>
         </Row>
     )
-
 }
 
 export default Login;

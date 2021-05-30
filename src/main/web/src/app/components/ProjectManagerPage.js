@@ -1,56 +1,33 @@
-import AppNavbar from './AppNavbar';
-import React, { Component } from 'react';
-import { Container } from 'reactstrap';
-import { Alert } from "reactstrap";
+import React, {useEffect, useState} from 'react';
+import { Alert } from 'react-bootstrap';
 import BackendService from '../services/BackendService';
 
-class ProjectManagerPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state={
-      content: "",
-      error: ""
-    }
-  }
+function ProjectManagerPage() {
+  const [error, setError] = useState("")
+  const [content, setContent] = useState("")
 
-  componentDidMount() {
+  useEffect(() => {
     BackendService.getPmBoard()
-    .then( response => {
-      this.setState({
-        content: response.data
-      })
-    } , error => {
-      console.log(error);
-      this.setState({
-        error: error.toString()
-      }); 
-    });
-  }
+        .then(
+            response => { setContent(response.data)},
+            error => { setError(error) });
+  })
 
-  render() {
-    return (
+  return (
       <div>
-        <AppNavbar/>
-        <Container fluid>
-          {
-            this.state.content ? (
-              <div style={{marginTop: "20px"}}>
-                <Alert color="info">
-                  <h2>{this.state.content}</h2>
-                </Alert>
-              </div>
-            ) : (
-              <div style={{marginTop: "20px"}}>
-                <Alert color="danger">
-                  {this.state.error}
-                </Alert>
-              </div>
-            )
-          }
-        </Container>
+        {content ? (
+            <div style={{marginTop: "20px"}}>
+              <Alert color="info"><h2>{content}</h2></Alert>
+            </div>
+        ) : (
+            <div style={{marginTop: "20px"}}>
+              <Alert color="danger">{error}</Alert>
+            </div>
+        )
+        }
       </div>
-    );
-  }
+  );
+
 }
 
 export default ProjectManagerPage;
