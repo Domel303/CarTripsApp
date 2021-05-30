@@ -6,10 +6,9 @@ import com.cars.trip.onlinetrips.request.UserEvent;
 import com.cars.trip.onlinetrips.service.EventService;
 import com.cars.trip.onlinetrips.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/events")
@@ -19,15 +18,15 @@ public class EventController {
     private final UserService userService;
 
     @Autowired
-    public EventController(EventService eventService, UserService userService)
-    {
+    public EventController(EventService eventService, UserService userService) {
         this.eventService = eventService;
         this.userService = userService;
     }
 
     @GetMapping("/allEvents")
-    public List<AppEvents> getAllEvents() {
-        return eventService.getAllEvents();
+    public Page<AppEvents> getAllEvents(@RequestParam(required = false) int page,
+                                        @RequestParam(required = false) int size) {
+        return eventService.getAllEvents(page, size);
     }
 
     @PostMapping
@@ -36,18 +35,17 @@ public class EventController {
     }
 
     @DeleteMapping(path = "/{eventId}")
-    public void deleteCar(@PathVariable("eventId") Long id)
-    {
+    public void deleteCar(@PathVariable("eventId") Long id) {
         eventService.deleteEvent(id);
     }
 
     @PutMapping(path = "/update")
     public void updateEvent(@RequestBody AppEvents event) {
-        eventService.updateEvent(event.getId(), event.getStart(),event.getDestination(),event.getCarCulture(),event.getDistance(),event.getDuration(),event.getDateOfEvent(),event.getDescription());
+        eventService.updateEvent(event.getId(), event.getStart(), event.getDestination(), event.getCarCulture(), event.getDistance(), event.getDuration(), event.getDateOfEvent(), event.getDescription());
     }
 
     @PostMapping("/register")
-    public void registerIntoEvent(@RequestBody UserEvent userEvent){
+    public void registerIntoEvent(@RequestBody UserEvent userEvent) {
         User user = userService.getUserByUsername(userEvent.getUserName());
         AppEvents event = eventService.getEvent(userEvent.getEventId());
         event.getSingedUsers().add(user);

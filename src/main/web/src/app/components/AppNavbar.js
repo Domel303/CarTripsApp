@@ -1,26 +1,37 @@
 import React, {useEffect, useState} from 'react'
-import {Nav, Navbar,} from 'react-bootstrap'
-import {withRouter} from 'react-router-dom'
+import {Button, Nav, Navbar,} from 'react-bootstrap'
+import {useHistory, withRouter} from 'react-router-dom'
 import AuthenticationService from '../services/AuthenticationService'
 
 function AppNavbar() {
-  const [user, setUser] = useState(false)
+    const [user, setUser] = useState(false)
+    const history = useHistory()
 
-  useEffect(() => {
-    const user = AuthenticationService.getCurrentUser();
-    if (user) {setUser(true)}
-  }, [])
+    useEffect(() => {
+        const user = AuthenticationService.getCurrentUser();
+        if (user) {
+            setUser(true)
+        }
+    }, [])
 
-  return (
-      <Navbar bg="primary" variant="dark">
-        <Navbar.Brand href="#home">Car trips</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Nav className="mr-auto">
-          {user && <Nav.Link href="/#/user">Zatim nic</Nav.Link>}
-          {user && <Nav.Link href="/#/signup">Sign up</Nav.Link>}
-        </Nav>
-      </Navbar>
-  )
+    const signOut = () => {
+        AuthenticationService.signOut()
+        history.push("/#/signin")
+        window.location.reload()
+    }
+    return (
+        <Navbar bg="primary" variant="dark">
+            <Navbar.Brand href="#home">Car trips</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+            <Nav className="mr-auto">
+                {user && <Nav.Link href="/#/profile">Profile</Nav.Link>}
+                {user && <Nav.Link><Button variant={'danger'} onClick={() => {
+                    signOut()
+                }}>Sign out</Button></Nav.Link>}
+
+            </Nav>
+        </Navbar>
+    )
 }
 
 export default withRouter(AppNavbar);

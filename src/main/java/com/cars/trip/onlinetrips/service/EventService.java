@@ -2,6 +2,7 @@ package com.cars.trip.onlinetrips.service;
 
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.entity.AppEvents;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.List;
 public interface EventService {
 
 
-    List<AppEvents> getAllEvents();
+    Page<AppEvents> getAllEvents(int page, int size);
 
     void saveEvent(AppEvents event);
 

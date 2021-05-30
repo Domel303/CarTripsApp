@@ -4,6 +4,8 @@ import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.entity.AppEvents;
 import com.cars.trip.onlinetrips.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,9 +22,15 @@ public class EventServiceImpl implements EventService {
     public EventServiceImpl(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
+
     @Override
-    public List<AppEvents> getAllEvents(){
-        return eventRepository.findAll();
+    public Page<AppEvents> getAllEvents(int page, int size){
+        if (!(page < 0 ||size <= 0)){
+           PageRequest onPage= PageRequest.of(page, size);
+           return eventRepository.findAll(onPage);
+        }else{
+            return Page.empty();
+        }
     }
 
     @Override
