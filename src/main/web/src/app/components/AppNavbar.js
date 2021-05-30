@@ -16,8 +16,8 @@ function AppNavbar() {
         <Navbar.Brand href="#home">Car trips</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Nav className="mr-auto">
-          {user && <Nav.Link href="/ProjectManagerPage">Zatim nic</Nav.Link>}
-          {user && AuthenticationService.isAdmin() && <Nav.Link href="/#/signup">User registration</Nav.Link>}
+          {user && <Nav.Link href="/#/user">Zatim nic</Nav.Link>}
+          {user && <Nav.Link href="/#/signup">Sign up</Nav.Link>}
         </Nav>
       </Navbar>
   )

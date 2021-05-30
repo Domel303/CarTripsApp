@@ -27,22 +27,22 @@ const BackendService = {
 
     //car function
     postCreateCar: async function (userName, car) {
-        return await axios.post('${SERVER_PREFIX}/api/cars/?userName=${userName}', car)
+        return await axios.post(`${SERVER_PREFIX}/api/cars/`,{userName: userName, car: car})
     },
 
     postDeleteCar: async function (carId) {
-        return await axios.post('${SERVER_PREFIX}/api/cars/delete?id=${carId}')
+        return await axios.post(`${SERVER_PREFIX}/api/cars/delete?id=${carId}`)
     },
 
     getAllCars: async function(){
-        return await axios.get('${SERVER_PREFIX}/api/cars/allCars')
+        return await axios.get(`${SERVER_PREFIX}/api/cars/allCars`)
     },
     postUpdateCar: async function(car){
-        return await axios.put('${SERVER_PREFIX}/api/cars/update',car)
+        return await axios.put(`${SERVER_PREFIX}/api/cars/update`,car)
     },
     //event function
     postCreateEvent: async function(event){
-        return await axios.post('${SERVER_PREFIX}/api/events',event)
+        return await axios.post(`${SERVER_PREFIX}/api/events`,event)
     },
 
 

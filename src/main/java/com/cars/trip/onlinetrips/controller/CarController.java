@@ -3,6 +3,7 @@ package com.cars.trip.onlinetrips.controller;
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.authentication.repository.UserRepository;
 import com.cars.trip.onlinetrips.entity.Cars;
+import com.cars.trip.onlinetrips.request.UserCar;
 import com.cars.trip.onlinetrips.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,19 +29,17 @@ public class CarController {
         return carService.getAllCars();
     }
 
-
     @PostMapping
-    public void createNewCar(@RequestParam String userName, @RequestBody Cars car) {
-        User user = userRepository.findByUsername(userName).orElseThrow(() -> new IllegalStateException("User with name" + userName + "could not be found"));
-        car.setUser(user);
-        carService.addNewCar(car);
-        user.setCar(car);
+    public void createNewCar(@RequestBody UserCar userCar) {
+        User user = userRepository.findByUsername(userCar.getUserName()).orElseThrow(() -> new IllegalStateException("User with name" + userCar.getUserName() + "could not be found"));
+        userCar.getCar().setUser(user);
+        carService.addNewCar(userCar.getCar());
+        user.setCar(userCar.getCar());
         userRepository.save(user);
-        System.out.println("car added with user " + userName);
     }
 
-    @PostMapping(path = "/delete")
-    public void deleteCar(@RequestParam Long id) {
+    @DeleteMapping(path = "/{carId}")
+    public void deleteCar(@PathVariable("carId") Long id) {
         carService.deleteCar(id);
     }
 

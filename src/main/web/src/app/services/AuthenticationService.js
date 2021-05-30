@@ -4,7 +4,7 @@ const SERVER_PREFIX = process.env.REACT_APP_BASE_URI
 
 const AuthenticationService = {
   signIn : function (username, password) {
-      return axios.post('${SERVER_PREFIX}/api/auth/signin', {username, password})
+      return axios.post(`${SERVER_PREFIX}/api/auth/signin`, {username, password})
         .then(response => {
           if (response.data.accessToken) {
             let value = JSON.stringify(response.data)
@@ -22,7 +22,7 @@ const AuthenticationService = {
   },
 
   register : function async(user)  {
-    return axios.post('${SERVER_PREFIX}/api/auth/signup', user);
+    return axios.post(`${SERVER_PREFIX}/api/auth/signup`, user);
   },
   isSignedIn : function async () { return localStorage.getItem(userKey) !== null },
 

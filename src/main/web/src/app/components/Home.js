@@ -1,21 +1,19 @@
 import {Link} from 'react-router-dom';
 import {Button, Container, Alert} from 'react-bootstrap';
 import AuthenticationService from "../services/AuthenticationService";
-import AppNavbar from "./AppNavbar";
 
 const WEB_NAME = "Car trips"
 
 function Home() {
   return (
       <div>
-          <AppNavbar />
         <Container fluid>
           {
             !AuthenticationService.isSignedIn() && (<div>
               <Alert variant="primary">
                 <h2> {WEB_NAME} </h2>
                 <Button color="success"><Link to="/signin"><span
-                    style={{color: "white"}}>Login</span></Link></Button>
+                    style={{color: "black"}}>Login</span></Link></Button>
               </Alert>
             </div>)
           }
