@@ -13,17 +13,47 @@ function EventList() {
 
     const history = useHistory()
 
-    const properties = {
-        "id": "Id",
-        "singedUsers": "Users",
-        "start": "Start",
-        "destination": "Destination",
-        "carCulture": "Car culture",
-        "distance": "Distance",
-        "duration": "Duration",
-        "dateOfEvent": "Date",
-        "description": "Description"
+    const onDelete = (id) => {
+        BackendService.deleteEvent(id).then()
     }
+
+    const actionsFormatter = (cell, row) =>
+        <Button type="submit" onClick={(event) => {
+            onDelete(row.id)
+        }}>Delete</Button>
+
+
+    const properties = [{
+        dataField: 'id',
+        text: 'Id'
+    }, {
+        dataField: 'start',
+        text: 'Začátek'
+    }, {
+        dataField: 'destination',
+        text: 'Cíl'
+    }, {
+        dataField: 'carCulture',
+        text: 'Typ aut'
+    }, {
+        dataField: 'distance',
+        text: 'Vzdalenost'
+    }, {
+        dataField: 'duration',
+        text: 'Trvání'
+    }, {
+        dataField: 'dateOfEvent',
+        text: 'Datum konání'
+    }, {
+        dataField: 'description',
+        text: 'Popis'
+    }, {
+        dataField: 'action',
+        text: 'Smazat',
+        isDummyField: true,
+        csvExport: false,
+        formatter: actionsFormatter
+    }];
 
     useEffect(() => {
         getEvents(maxPage, (response) => {

@@ -51,6 +51,9 @@ const BackendService = {
         if (size !== undefined) url += `&size=${size}`
 
         return await axios.get(url)
+    },
+    deleteEvent: async function(event){
+        return await axios.delete(`${SERVER_PREFIX}/api/events/${event.id}`)
     }
 
 
