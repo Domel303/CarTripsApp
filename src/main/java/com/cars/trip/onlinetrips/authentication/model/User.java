@@ -1,6 +1,7 @@
 package com.cars.trip.onlinetrips.authentication.model;
 
 
+import com.cars.trip.onlinetrips.dto.CarsDTO;
 import com.cars.trip.onlinetrips.entity.Car;
 
 import javax.persistence.*;

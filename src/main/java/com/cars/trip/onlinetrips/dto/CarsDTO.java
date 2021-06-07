@@ -1,12 +1,9 @@
 package com.cars.trip.onlinetrips.dto;
 
 import com.cars.trip.onlinetrips.authentication.model.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.Column;
-import javax.persistence.OneToOne;
 
 public class CarsDTO {
+
     private Long id;
 
     private String carBrand;

@@ -2,7 +2,7 @@ package com.cars.trip.onlinetrips.controller;
 
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.entity.AppEvent;
-import com.cars.trip.onlinetrips.request.UserEvent;
+import com.cars.trip.onlinetrips.dto.UserEventDTO;
 import com.cars.trip.onlinetrips.service.EventService;
 import com.cars.trip.onlinetrips.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +52,9 @@ public class EventController {
     }
 
     @PostMapping("/register")
-    public void registerIntoEvent(@RequestBody UserEvent userEvent) {
-        User user = userService.getUserByUsername(userEvent.getUserName());
-        AppEvent event = eventService.getEvent(userEvent.getEventId());
+    public void registerIntoEvent(@RequestBody UserEventDTO userEventDTO) {
+        User user = userService.getUserByUsername(userEventDTO.getUserName());
+        AppEvent event = eventService.getEvent(userEventDTO.getEventId());
         event.getSingedUsers().add(user);
         eventService.saveEvent(event);
     }

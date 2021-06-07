@@ -1,5 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
+import com.cars.trip.onlinetrips.dto.CarsDTO;
 import com.cars.trip.onlinetrips.entity.Car;
 import com.cars.trip.onlinetrips.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,9 @@ public class CarServiceImpl implements CarService {
 
 
     @Override
-    public void addNewCar(Car car) {
-        carRepository.save(car);
+    public void addNewCar(CarsDTO car) {
+        //map dto to car
+      //  carRepository.save(car);
     }
 
     @Override

@@ -1,6 +1,6 @@
-package com.cars.trip.onlinetrips.request;
+package com.cars.trip.onlinetrips.dto;
 
-public class UserEvent {
+public class UserEventDTO {
     private String userName;
     private Long eventId;
 
