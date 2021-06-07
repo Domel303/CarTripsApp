@@ -29,9 +29,20 @@ public class CarServiceImpl implements CarService {
 
 
     @Override
-    public void addNewCar(CarsDTO car) {
-        //map dto to car
-      //  carRepository.save(car);
+    public Car addNewCar(CarsDTO carDTO) {
+        Car car = mapCarDTOToCar(carDTO);
+        return carRepository.save(car);
+    }
+
+    private Car mapCarDTOToCar(CarsDTO carDTO) {
+        Car car = new Car();
+        car.setCarBrand(carDTO.getCarBrand());
+        car.setCarModel(carDTO.getCarModel());
+        car.setCountryOfOrigin(carDTO.getCountryOfOrigin());
+        car.setEnginePowerKW(carDTO.getEnginePowerKW());
+        car.setUser(carDTO.getUser());
+
+        return car;
     }
 
     @Override
@@ -45,23 +56,23 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public void updateCar(Long carId, String carBrand, String carModel, String countryOfOrigin, String enginePowerKw) {
-        Car car = carRepository.findById(carId).orElseThrow(() -> new IllegalStateException("Car with id" + carId + "could not be found"));
+    public void updateCar(CarsDTO carsDTO) {
+        Car car = carRepository.findById(carsDTO.getId()).orElseThrow(() -> new IllegalStateException("Car with id" + carsDTO.getId() + "could not be found"));
 
-        if (carBrand != null && carBrand.length() > 0 && !Objects.equals(car.getCarBrand(), carBrand)) {
-            car.setCarBrand(carBrand);
+        if (carsDTO.getCarBrand() != null && carsDTO.getCarBrand().length() > 0 && !Objects.equals(car.getCarBrand(), carsDTO.getCarBrand())) {
+            car.setCarBrand(carsDTO.getCarBrand());
         }
 
-        if (carModel != null && carModel.length() > 0 && !Objects.equals(car.getCarModel(), carModel)) {
-            car.setCarModel(carModel);
+        if (carsDTO.getCarModel() != null && carsDTO.getCarModel().length() > 0 && !Objects.equals(car.getCarModel(), carsDTO.getCarModel())) {
+            car.setCarModel(carsDTO.getCarModel());
         }
 
-        if (countryOfOrigin != null && countryOfOrigin.length() > 0 && !Objects.equals(car.getCountryOfOrigin(), countryOfOrigin)) {
-            car.setCountryOfOrigin(countryOfOrigin);
+        if (carsDTO.getCountryOfOrigin() != null && carsDTO.getCountryOfOrigin().length() > 0 && !Objects.equals(car.getCountryOfOrigin(), carsDTO.getCountryOfOrigin())) {
+            car.setCountryOfOrigin(carsDTO.getCountryOfOrigin());
         }
 
-        if (enginePowerKw != null && enginePowerKw.length() > 0 && !Objects.equals(car.getEnginePowerKW(), enginePowerKw)) {
-            car.setEnginePowerKW(enginePowerKw);
+        if (carsDTO.getEnginePowerKW() != null && carsDTO.getEnginePowerKW().length() > 0 && !Objects.equals(car.getEnginePowerKW(), carsDTO.getEnginePowerKW())) {
+            car.setEnginePowerKW(carsDTO.getEnginePowerKW());
         }
     }
 

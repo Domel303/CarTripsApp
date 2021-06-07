@@ -1,5 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
+import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
 import com.cars.trip.onlinetrips.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,29 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public void saveEvent(AppEventDTO eventDTO){
+        AppEvent event = mapEventDTOToEvent(eventDTO);
+        eventRepository.save(event);
+    }
+
+    @Override
     public void saveEvent(AppEvent event){
         eventRepository.save(event);
     }
 
+    private AppEvent mapEventDTOToEvent(AppEventDTO eventDTO) {
+        AppEvent event = new AppEvent();
+        event.setSingedUsers(eventDTO.getSingedUsers());
+        event.setStart(eventDTO.getStart());
+        event.setDestination(eventDTO.getDestination());
+        event.setCarCulture(eventDTO.getCarCulture());
+        event.setDistance(eventDTO.getDistance());
+        event.setDuration(eventDTO.getDuration());
+        event.setDateOfEvent(eventDTO.getDateOfEvent());
+        event.setDescription(eventDTO.getDescription());
+
+        return event;
+    }
     @Override
     public void deleteEvent(Long id){
         boolean exist = eventRepository.existsById(id);

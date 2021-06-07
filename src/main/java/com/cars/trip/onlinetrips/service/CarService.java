@@ -12,9 +12,9 @@ public interface CarService {
     List<Car> getAllCars();
 
 
-    void addNewCar(CarsDTO car);
+    Car addNewCar(CarsDTO car);
 
     void deleteCar(Long id);
 
-    void updateCar(Long carId, String carBrand, String carModel, String countryOfOrigin, String enginePowerKw);
+    void updateCar(CarsDTO carsDTO);
 }

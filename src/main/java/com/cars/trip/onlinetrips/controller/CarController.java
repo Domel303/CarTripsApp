@@ -38,11 +38,9 @@ public class CarController {
     public void createNewCar(@RequestBody CarsDTO userCarDTO) {
         UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findByUsername(principles.getUsername()).orElseThrow(() -> new IllegalStateException("User with name" + userCarDTO.getUser() + "could not be found"));
-
-        //get cardto to car
-//        userCarDTO.getCar().setUser(user);
-//        carService.addNewCar(userCarDTO.getCar());
-//        user.setCar(userCarDTO.getCar());
+        userCarDTO.setUser(user);
+        Car car = carService.addNewCar(userCarDTO);
+        user.setCar(car);
         userRepository.save(user);
     }
 
@@ -52,7 +50,7 @@ public class CarController {
     }
 
     @PutMapping(path = "/update")
-    public void updateCar(@RequestBody Car car) {
-        carService.updateCar(car.getId(), car.getCarBrand(), car.getCarModel(), car.getCountryOfOrigin(), car.getEnginePowerKW());
+    public void updateCar(@RequestBody CarsDTO carsDTO) {
+        carService.updateCar(carsDTO);
     }
 }

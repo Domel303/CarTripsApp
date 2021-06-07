@@ -1,5 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
+import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public interface EventService {
     Page<AppEvent> getAllEvents(int page, int size);
 
     List<AppEvent> getAllEventsNP();
+
+    void saveEvent(AppEventDTO event);
 
     void saveEvent(AppEvent event);
 
