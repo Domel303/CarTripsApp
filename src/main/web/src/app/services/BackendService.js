@@ -54,6 +54,9 @@ const BackendService = {
     },
     deleteEvent: async function(event){
         return await axios.delete(`${SERVER_PREFIX}/api/events/${event.id}`)
+    },
+    getEventList: async function(){
+        return await axios.get(`${SERVER_PREFIX}/api/events/allEventsNP`)
     }
 
 

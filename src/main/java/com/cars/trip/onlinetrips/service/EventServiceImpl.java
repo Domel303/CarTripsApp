@@ -1,7 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
-import com.cars.trip.onlinetrips.authentication.model.User;
-import com.cars.trip.onlinetrips.entity.AppEvents;
+import com.cars.trip.onlinetrips.entity.AppEvent;
 import com.cars.trip.onlinetrips.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,7 +23,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Page<AppEvents> getAllEvents(int page, int size){
+    public Page<AppEvent> getAllEvents(int page, int size){
         if (!(page < 0 ||size <= 0)){
            PageRequest onPage= PageRequest.of(page, size);
            return eventRepository.findAll(onPage);
@@ -34,7 +33,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void saveEvent(AppEvents event){
+    public List<AppEvent> getAllEventsNP(){
+        return eventRepository.findAll();
+    }
+
+    @Override
+    public void saveEvent(AppEvent event){
         eventRepository.save(event);
     }
 
@@ -58,7 +62,7 @@ public class EventServiceImpl implements EventService {
                             Date dateOfEvent,
                             String description){
 
-        AppEvents event = eventRepository.
+        AppEvent event = eventRepository.
                 findById(eventId).
                 orElseThrow(() -> new IllegalStateException("Event with id"+ eventId+ " could not be found") );
 
@@ -92,7 +96,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public AppEvents getEvent(Long id){
+    public AppEvent getEvent(Long id){
         return eventRepository.findById(id).orElseThrow(() -> new IllegalStateException("Event with id "+ id+ "could not be found"));
     }
 }

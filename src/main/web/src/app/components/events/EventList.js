@@ -93,7 +93,7 @@ function EventList() {
             <Row>
                 <Col>
                     <Button onClick={(event) => {
-                        history.push("/event/add")
+                        history.push("/eventFormular")
                     }} variant="outline-primary">Add Event</Button>
                 </Col>
             </Row>

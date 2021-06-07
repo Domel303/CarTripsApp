@@ -1,6 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
-import com.cars.trip.onlinetrips.entity.Cars;
+import com.cars.trip.onlinetrips.entity.Car;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,10 +8,10 @@ import java.util.List;
 @Service
 public interface CarService {
 
-    List<Cars> getAllCars();
+    List<Car> getAllCars();
 
 
-    void addNewCar(Cars car);
+    void addNewCar(Car car);
 
     void deleteCar(Long id);
 

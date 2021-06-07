@@ -2,7 +2,7 @@ package com.cars.trip.onlinetrips.service;
 
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.authentication.repository.UserRepository;
-import com.cars.trip.onlinetrips.entity.Cars;
+import com.cars.trip.onlinetrips.entity.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    public Cars getCar(String userName){
+    public Car getCar(String userName){
         User user = userRepository.findByUsername(userName).orElseThrow(()-> new IllegalStateException("User " + userName+ "could not be found"));
         return user.getCar();
     }

@@ -1,10 +1,10 @@
 package com.cars.trip.onlinetrips.request;
 
-import com.cars.trip.onlinetrips.entity.Cars;
+import com.cars.trip.onlinetrips.entity.Car;
 
 public class UserCar {
     String userName;
-    Cars car;
+    Car car;
 
     public String getUserName() {
         return userName;
@@ -14,11 +14,11 @@ public class UserCar {
         this.userName = userName;
     }
 
-    public Cars getCar() {
+    public Car getCar() {
         return car;
     }
 
-    public void setCar(Cars car) {
+    public void setCar(Car car) {
         this.car = car;
     }
 }

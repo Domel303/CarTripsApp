@@ -11,7 +11,6 @@ import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.authentication.repository.RoleRepository;
 import com.cars.trip.onlinetrips.authentication.repository.UserRepository;
 import com.cars.trip.onlinetrips.authentication.security.jwt.JwtProvider;
-import com.cars.trip.onlinetrips.entity.Cars;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -7,6 +7,7 @@ import Profile from './app/components/Profile';
 import SignUp from './app/components/SignUp';
 import AppNavbar from "./app/components/AppNavbar";
 import Login from "./app/components/Login";
+import EventFormular from "./app/components/events/EventFormular";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path='/' exact={true} component={Home}/>
               <Route path='/home' exact={true} component={Home}/>
               <Route path='/profile' exact={true} component={Profile}/>
+              <Route path='/eventFormular' exaxt={true} component={EventFormular}/>
               <Route path='/signin' exact={true} component={Login}/>
               <Route path='/signup' exact={true} component={SignUp}/>
             </Switch>

@@ -1,11 +1,10 @@
 package com.cars.trip.onlinetrips.authentication.model;
 
 
-import com.cars.trip.onlinetrips.entity.Cars;
+import com.cars.trip.onlinetrips.entity.Car;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -38,7 +37,7 @@ public class User {
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Cars car;
+    private Car car;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -58,7 +57,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstname, String lastname, String username, String email, String password, Cars car) {
+    public User(String firstname, String lastname, String username, String email, String password, Car car) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -115,11 +114,11 @@ public class User {
         this.password = password;
     }
 
-    public Cars getCar() {
+    public Car getCar() {
         return car;
     }
 
-    public void setCar(Cars car) {
+    public void setCar(Car car) {
         this.car = car;
     }
 

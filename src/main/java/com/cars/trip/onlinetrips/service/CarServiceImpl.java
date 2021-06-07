@@ -1,6 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
-import com.cars.trip.onlinetrips.entity.Cars;
+import com.cars.trip.onlinetrips.entity.Car;
 import com.cars.trip.onlinetrips.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +22,13 @@ public class CarServiceImpl implements CarService {
 
 
     @Override
-    public List<Cars> getAllCars() {
+    public List<Car> getAllCars() {
         return carRepository.findAll();
     }
 
 
     @Override
-    public void addNewCar(Cars car) {
+    public void addNewCar(Car car) {
         carRepository.save(car);
     }
 
@@ -44,7 +44,7 @@ public class CarServiceImpl implements CarService {
     @Override
     @Transactional
     public void updateCar(Long carId, String carBrand, String carModel, String countryOfOrigin, String enginePowerKw) {
-        Cars car = carRepository.findById(carId).orElseThrow(() -> new IllegalStateException("Car with id" + carId + "could not be found"));
+        Car car = carRepository.findById(carId).orElseThrow(() -> new IllegalStateException("Car with id" + carId + "could not be found"));
 
         if (carBrand != null && carBrand.length() > 0 && !Objects.equals(car.getCarBrand(), carBrand)) {
             car.setCarBrand(carBrand);

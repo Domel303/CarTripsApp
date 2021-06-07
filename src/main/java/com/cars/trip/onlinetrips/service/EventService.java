@@ -1,7 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
-import com.cars.trip.onlinetrips.authentication.model.User;
-import com.cars.trip.onlinetrips.entity.AppEvents;
+import com.cars.trip.onlinetrips.entity.AppEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +11,11 @@ import java.util.List;
 public interface EventService {
 
 
-    Page<AppEvents> getAllEvents(int page, int size);
+    Page<AppEvent> getAllEvents(int page, int size);
 
-    void saveEvent(AppEvents event);
+    List<AppEvent> getAllEventsNP();
+
+    void saveEvent(AppEvent event);
 
     void deleteEvent(Long id);
 
@@ -27,5 +28,5 @@ public interface EventService {
                      Date dateOfEvent,
                      String description);
 
-    AppEvents getEvent(Long id);
+    AppEvent getEvent(Long id);
 }

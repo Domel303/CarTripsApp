@@ -2,7 +2,7 @@ package com.cars.trip.onlinetrips.controller;
 
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.authentication.repository.UserRepository;
-import com.cars.trip.onlinetrips.entity.Cars;
+import com.cars.trip.onlinetrips.entity.Car;
 import com.cars.trip.onlinetrips.request.UserCar;
 import com.cars.trip.onlinetrips.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class CarController {
     }
 
     @GetMapping(path = "/allCars")
-    public List<Cars> getAllCars() {
+    public List<Car> getAllCars() {
         return carService.getAllCars();
     }
 
@@ -44,7 +44,7 @@ public class CarController {
     }
 
     @PutMapping(path = "/update")
-    public void updateCar(@RequestBody Cars car) {
+    public void updateCar(@RequestBody Car car) {
         carService.updateCar(car.getId(), car.getCarBrand(), car.getCarModel(), car.getCountryOfOrigin(), car.getEnginePowerKW());
     }
 }

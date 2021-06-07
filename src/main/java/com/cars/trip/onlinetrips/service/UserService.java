@@ -1,9 +1,9 @@
 package com.cars.trip.onlinetrips.service;
 
 import com.cars.trip.onlinetrips.authentication.model.User;
-import com.cars.trip.onlinetrips.entity.Cars;
+import com.cars.trip.onlinetrips.entity.Car;
 
 public interface UserService {
-    public Cars getCar(String userName);
+    public Car getCar(String userName);
     public User getUserByUsername(String userName);
 }
