@@ -58,7 +58,7 @@ public class EventController {
     }
 
     @PostMapping("/register")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void registerIntoEvent(@RequestBody UserEventDTO userEventDTO) {
         UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.getUserByUsername(principles.getUsername());

@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {Alert, Button, Container} from 'reactstrap'
 
 import AuthenticationService from '../services/AuthenticationService'
 
 function Profile() {
     const [user, setUser] = useState(undefined)
+
+    const history = useHistory()
 
     useEffect(() => {
         const user = AuthenticationService.getCurrentUser();
@@ -16,7 +18,9 @@ function Profile() {
 
     if (user && user.accessToken) {
         let roles = "";
-        user.authorities.forEach(authority => {roles = roles + " " + authority.authority});
+        user.authorities.forEach(authority => {
+            roles = roles + " " + authority.authority
+        });
 
         userInfo = (
             <div style={{marginTop: "20px"}}>
@@ -28,6 +32,9 @@ function Profile() {
                         <li>Authorities: {roles}</li>
                     </ul>
                 </Alert>
+                <Button onClick={(event) => {
+                    history.push("/carFormular")
+                }} variant="outline-primary">Create car</Button>
             </div>
         );
     } else { // not login

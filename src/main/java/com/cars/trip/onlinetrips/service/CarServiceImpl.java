@@ -83,4 +83,9 @@ public class CarServiceImpl implements CarService {
         }
     }
 
+    @Override
+    public List<Car> getAllCarsNP() {
+        return carRepository.findAll();
+    }
+
 }

@@ -26,8 +26,8 @@ const BackendService = {
     },
 
     //car function
-    postCreateCar: async function (userName, car) {
-        return await axios.post(`${SERVER_PREFIX}/api/cars/`,{userName: userName, car: car})
+    postCreateCar: async function (car) {
+        return await axios.post(`${SERVER_PREFIX}/api/cars`,car)
     },
 
     deleteCar: async function (car) {
@@ -44,6 +44,9 @@ const BackendService = {
     },
     postUpdateCar: async function(car){
         return await axios.put(`${SERVER_PREFIX}/api/cars/update`,car)
+    },
+    getCarList: async function(){
+        return await axios.get(`${SERVER_PREFIX}/api/cars/allCarsNP`)
     },
     //event function
     postCreateEvent: async function(event){

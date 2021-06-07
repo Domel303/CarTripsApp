@@ -35,8 +35,13 @@ public class CarController {
         return carService.getAllCars(page,size);
     }
 
+    @GetMapping(path = "/allCarsNP")
+    public List<Car> getAllCarList(){
+        return carService.getAllCarsNP();
+    }
+
     @PostMapping
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void createNewCar(@RequestBody CarsDTO userCarDTO) {
         UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findByUsername(principles.getUsername()).orElseThrow(() -> new IllegalStateException("User with name" + userCarDTO.getUser() + "could not be found"));
