@@ -30,12 +30,17 @@ const BackendService = {
         return await axios.post(`${SERVER_PREFIX}/api/cars/`,{userName: userName, car: car})
     },
 
-    postDeleteCar: async function (carId) {
-        return await axios.post(`${SERVER_PREFIX}/api/cars/delete?id=${carId}`)
+    deleteCar: async function (car) {
+        return await axios.delete(`${SERVER_PREFIX}/api/cars/${car.id}`)
     },
 
-    getAllCars: async function(){
-        return await axios.get(`${SERVER_PREFIX}/api/cars/allCars`)
+    getAllCars: async function(page, size){
+        let url = `${SERVER_PREFIX}/api/cars/allCars`
+
+        if (page !== undefined) url += `?page=${page}`
+        if (size !== undefined) url += `&size=${size}`
+
+        return await axios.get(url)
     },
     postUpdateCar: async function(car){
         return await axios.put(`${SERVER_PREFIX}/api/cars/update`,car)

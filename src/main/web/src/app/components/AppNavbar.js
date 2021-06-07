@@ -26,7 +26,7 @@ function AppNavbar() {
             <Nav className="mr-auto">
                 {user && <Nav.Link href="/#/profile">Profile</Nav.Link>}
                 {user && <Nav.Link href="/#/eventFormular">Create event</Nav.Link>}
-
+                {user && <Nav.Link href="/#/carList">Cars</Nav.Link>}
                 {user && <Nav.Link><Button variant={'danger'} onClick={() => {
                     signOut()
                 }}>Sign out</Button></Nav.Link>}

@@ -8,25 +8,27 @@ import SignUp from './app/components/SignUp';
 import AppNavbar from "./app/components/AppNavbar";
 import Login from "./app/components/Login";
 import EventFormular from "./app/components/events/EventFormular";
+import CarList from "./app/components/cars/CarList";
 
 function App() {
-  return (
-      <div>
-        <AppNavbar/>
-        <Container fluid>
-          <HashRouter>
-            <Switch>
-              <Route path='/' exact={true} component={Home}/>
-              <Route path='/home' exact={true} component={Home}/>
-              <Route path='/profile' exact={true} component={Profile}/>
-              <Route path='/eventFormular' exaxt={true} component={EventFormular}/>
-              <Route path='/signin' exact={true} component={Login}/>
-              <Route path='/signup' exact={true} component={SignUp}/>
-            </Switch>
-          </HashRouter>
-        </Container>
-      </div>
-  );
+    return (
+        <div>
+            <AppNavbar/>
+            <Container fluid>
+                <HashRouter>
+                    <Switch>
+                        <Route path='/' exact={true} component={Home}/>
+                        <Route path='/home' exact={true} component={Home}/>
+                        <Route path='/profile' exact={true} component={Profile}/>
+                        <Route path='/eventFormular' exaxt={true} component={EventFormular}/>
+                        <Route path='/carList' exaxt={true} component={CarList}/>
+                        <Route path='/signin' exact={true} component={Login}/>
+                        <Route path='/signup' exact={true} component={SignUp}/>
+                    </Switch>
+                </HashRouter>
+            </Container>
+        </div>
+    );
 }
 
 export default App;

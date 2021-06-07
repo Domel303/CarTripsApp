@@ -2,6 +2,7 @@ package com.cars.trip.onlinetrips.service;
 
 import com.cars.trip.onlinetrips.dto.CarsDTO;
 import com.cars.trip.onlinetrips.entity.Car;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 @Service
 public interface CarService {
 
-    List<Car> getAllCars();
+    Page<Car> getAllCars(int page, int size);
 
 
     Car addNewCar(CarsDTO car);

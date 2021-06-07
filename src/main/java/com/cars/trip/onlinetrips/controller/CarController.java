@@ -7,6 +7,7 @@ import com.cars.trip.onlinetrips.dto.CarsDTO;
 import com.cars.trip.onlinetrips.entity.Car;
 import com.cars.trip.onlinetrips.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,8 +30,9 @@ public class CarController {
     }
 
     @GetMapping(path = "/allCars")
-    public List<Car> getAllCars() {
-        return carService.getAllCars();
+    public Page<Car> getAllCars(@RequestParam(required = false) int page,
+                                @RequestParam(required = false) int size) {
+        return carService.getAllCars(page,size);
     }
 
     @PostMapping

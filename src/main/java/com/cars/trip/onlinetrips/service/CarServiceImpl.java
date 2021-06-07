@@ -4,6 +4,8 @@ import com.cars.trip.onlinetrips.dto.CarsDTO;
 import com.cars.trip.onlinetrips.entity.Car;
 import com.cars.trip.onlinetrips.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,8 +25,13 @@ public class CarServiceImpl implements CarService {
 
 
     @Override
-    public List<Car> getAllCars() {
-        return carRepository.findAll();
+    public Page<Car> getAllCars(int page, int size) {
+        if (!(page < 0 ||size <= 0)){
+            PageRequest onPage= PageRequest.of(page, size);
+            return carRepository.findAll(onPage);
+        }else{
+            return Page.empty();
+        }
     }
 
 
