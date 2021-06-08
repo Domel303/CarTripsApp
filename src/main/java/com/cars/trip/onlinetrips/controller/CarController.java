@@ -41,7 +41,6 @@ public class CarController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_USER')")
     public void createNewCar(@RequestBody CarsDTO userCarDTO) {
         UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findByUsername(principles.getUsername()).orElseThrow(() -> new IllegalStateException("User with name" + userCarDTO.getUser() + "could not be found"));

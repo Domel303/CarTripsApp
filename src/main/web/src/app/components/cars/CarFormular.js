@@ -27,7 +27,7 @@ const AddCar = () => {
     const onNewItem = (event) => {
         event.preventDefault()
         BackendService.postCreateCar(newItem).then((resp) => {
-            history.push("/carList")
+            history.push("/profile")
         })
     }
 

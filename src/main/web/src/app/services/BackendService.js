@@ -27,7 +27,7 @@ const BackendService = {
 
     //car function
     postCreateCar: async function (car) {
-        return await axios.post(`${SERVER_PREFIX}/api/cars`,car)
+        return await axios.post(`${SERVER_PREFIX}/api/cars/`,car)
     },
 
     deleteCar: async function (car) {
@@ -65,8 +65,17 @@ const BackendService = {
     },
     getEventList: async function(){
         return await axios.get(`${SERVER_PREFIX}/api/events/allEventsNP`)
-    }
+    },
 
+    //user function
+    getAllUsers: async function(page, size){
+        let url = `${SERVER_PREFIX}/api/events/allEvents`
+
+        if (page !== undefined) url += `?page=${page}`
+        if (size !== undefined) url += `&size=${size}`
+
+        return await axios.get(url)
+    }
 
 
 }
