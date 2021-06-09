@@ -23,7 +23,6 @@ public class CarController {
     private final CarService carService;
     private final UserRepository userRepository;
 
-    @Autowired
     public CarController(CarService carService, UserRepository userRepository) {
         this.carService = carService;
         this.userRepository = userRepository;
@@ -35,19 +34,21 @@ public class CarController {
         return carService.getAllCars(page,size);
     }
 
-    @GetMapping(path = "/allCarsNP")
-    public List<Car> getAllCarList(){
-        return carService.getAllCarsNP();
-    }
 
     @PostMapping
-    public void createNewCar(@RequestBody CarsDTO userCarDTO) {
-        UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.findByUsername(principles.getUsername()).orElseThrow(() -> new IllegalStateException("User with name" + userCarDTO.getUser() + "could not be found"));
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public Car createNewCar(@RequestBody CarsDTO userCarDTO) {
+        Object principles = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = null;
+        if(principles instanceof UserPrinciple)
+            user = userRepository.findByUsername(((UserPrinciple)principles).getUsername()).orElseThrow(() -> new IllegalStateException("User with name" + userCarDTO.getUser() + "could not be found"));
+        else
+            user = userRepository.findByUsername(principles.toString()).orElseThrow(() -> new IllegalStateException("User with name " + principles.toString() + "could not be found"));
         userCarDTO.setUser(user);
         Car car = carService.addNewCar(userCarDTO);
         user.setCar(car);
         userRepository.save(user);
+        return car;
     }
 
     @DeleteMapping(path = "/{carId}")
