@@ -13,10 +13,10 @@ const AddCar = () => {
     });
 
     const history = useHistory()
+
     useEffect(() => {
-        BackendService.getCarList()
+        BackendService.getAllCars()
             .then((resp) => {
-                console.log(resp)
                 setNewItem(resp.data)
             }, (error) => {
                 console.log(error.toString())

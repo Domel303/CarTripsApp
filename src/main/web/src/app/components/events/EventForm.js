@@ -15,15 +15,13 @@ const AddEvent= () =>{
         description:undefined
     });
 
-    const [newItemE, setNewItemE] = useState([])
 
     const history = useHistory()
 
     useEffect(() => {
-        BackendService.getEventList()
+        BackendService.getAllEvents()
             .then((resp) => {
-                console.log(resp)
-                setNewItemE(resp.data)
+                setNewItem(resp.data)
             }, (error) => {
                 console.log(error.toString())
             })
@@ -32,7 +30,7 @@ const AddEvent= () =>{
     const onNewItem = (event) => {
         event.preventDefault()
         BackendService.postCreateEvent(newItem).then((resp) => {
-            history.push("/")
+            history.push("/home")
         })
     }
 

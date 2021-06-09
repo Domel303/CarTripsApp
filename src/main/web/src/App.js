@@ -7,9 +7,9 @@ import Profile from './app/components/Profile';
 import SignUp from './app/components/SignUp';
 import AppNavbar from "./app/components/AppNavbar";
 import Login from "./app/components/Login";
-import EventFormular from "./app/components/events/EventFormular";
+import EventFormular from "./app/components/events/EventForm";
 import CarList from "./app/components/cars/CarList";
-import CarFormular from "./app/components/cars/CarFormular";
+import CarFormular from "./app/components/cars/CarForm";
 import UserList from "./app/components/user/UserList";
 
 function App() {
