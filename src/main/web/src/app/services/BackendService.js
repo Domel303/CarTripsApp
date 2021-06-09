@@ -4,7 +4,7 @@ axios.interceptors.request.use(config => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     if (user && user.accessToken) {
-        config.headers.Authorization = 'Bearer' + user.accessToken;
+        config.headers.Authorization = 'Bearer ' + user.accessToken;
     }
 
     return config;
@@ -45,9 +45,7 @@ const BackendService = {
     postUpdateCar: async function(car){
         return await axios.put(`${SERVER_PREFIX}/api/cars/update`,car)
     },
-    getCarList: async function(){
-        return await axios.get(`${SERVER_PREFIX}/api/cars/allCarsNP`)
-    },
+
     //event function
     postCreateEvent: async function(event){
         return await axios.post(`${SERVER_PREFIX}/api/events`,event)
