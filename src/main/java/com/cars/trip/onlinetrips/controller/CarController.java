@@ -28,7 +28,7 @@ public class CarController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping(path = "/allCars")
+    @GetMapping(path = "/")
     public Page<Car> getAllCars(@RequestParam(required = false) int page,
                                 @RequestParam(required = false) int size) {
         return carService.getAllCars(page,size);
@@ -56,7 +56,7 @@ public class CarController {
         carService.deleteCar(id);
     }
 
-    @PutMapping(path = "/update")
+    @PutMapping(path = "/")
     public void updateCar(@RequestBody CarsDTO carsDTO) {
         carService.updateCar(carsDTO);
     }

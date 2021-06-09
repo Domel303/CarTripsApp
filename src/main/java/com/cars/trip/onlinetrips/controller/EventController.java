@@ -7,13 +7,10 @@ import com.cars.trip.onlinetrips.entity.AppEvent;
 import com.cars.trip.onlinetrips.dto.UserEventDTO;
 import com.cars.trip.onlinetrips.service.EventService;
 import com.cars.trip.onlinetrips.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -28,20 +25,15 @@ public class EventController {
         this.userService = userService;
     }
 
-    @GetMapping("/allEvents")
+    @GetMapping
     public Page<AppEvent> getAllEvents(@RequestParam(required = false) int page,
                                        @RequestParam(required = false) int size) {
         return eventService.getAllEvents(page, size);
     }
 
-    @GetMapping("/allEventsNP")
-    public List<AppEvent> getAllEventsNP(){
-        return eventService.getAllEventsNP();
-    }
-
     @PostMapping
-    public void createNewEvent(@RequestBody AppEventDTO eventDTO) {
-        eventService.saveEvent(eventDTO);
+    public AppEvent createNewEvent(@RequestBody AppEventDTO eventDTO) {
+       return  eventService.saveEvent(eventDTO);
     }
 
 
@@ -51,7 +43,7 @@ public class EventController {
         eventService.deleteEvent(id);
     }
 
-    @PutMapping(path = "/update")
+    @PutMapping
     public void updateEvent(@RequestBody AppEventDTO event) {
         eventService.updateEvent(event.getId(), event.getStart(), event.getDestination(), event.getCarCulture(), event.getDistance(), event.getDuration(), event.getDateOfEvent(), event.getDescription());
     }

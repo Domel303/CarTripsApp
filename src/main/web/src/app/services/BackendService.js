@@ -35,7 +35,7 @@ const BackendService = {
     },
 
     getAllCars: async function(page, size){
-        let url = `${SERVER_PREFIX}/api/cars/allCars`
+        let url = `${SERVER_PREFIX}/api/cars/`
 
         if (page !== undefined) url += `?page=${page}`
         if (size !== undefined) url += `&size=${size}`
@@ -43,7 +43,7 @@ const BackendService = {
         return await axios.get(url)
     },
     postUpdateCar: async function(car){
-        return await axios.put(`${SERVER_PREFIX}/api/cars/update`,car)
+        return await axios.put(`${SERVER_PREFIX}/api/cars/`,car)
     },
 
     //event function
@@ -51,7 +51,7 @@ const BackendService = {
         return await axios.post(`${SERVER_PREFIX}/api/events`,event)
     },
     getAllEvents: async function(page, size) {
-        let url = `${SERVER_PREFIX}/api/events/allEvents`
+        let url = `${SERVER_PREFIX}/api/events`
 
         if (page !== undefined) url += `?page=${page}`
         if (size !== undefined) url += `&size=${size}`
@@ -61,13 +61,10 @@ const BackendService = {
     deleteEvent: async function(event){
         return await axios.delete(`${SERVER_PREFIX}/api/events/${event.id}`)
     },
-    getEventList: async function(){
-        return await axios.get(`${SERVER_PREFIX}/api/events/allEventsNP`)
-    },
 
     //user function
     getAllUsers: async function(page, size){
-        let url = `${SERVER_PREFIX}/api/events/allEvents`
+        let url = `${SERVER_PREFIX}/api/users`
 
         if (page !== undefined) url += `?page=${page}`
         if (size !== undefined) url += `&size=${size}`

@@ -3,7 +3,6 @@ package com.cars.trip.onlinetrips.service;
 import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
 import com.cars.trip.onlinetrips.repository.EventRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -38,9 +37,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void saveEvent(AppEventDTO eventDTO){
+    public AppEvent saveEvent(AppEventDTO eventDTO){
         AppEvent event = mapEventDTOToEvent(eventDTO);
-        eventRepository.save(event);
+       return eventRepository.save(event);
     }
 
     @Override

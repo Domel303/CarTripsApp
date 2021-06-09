@@ -16,7 +16,7 @@ public interface EventService {
 
     List<AppEvent> getAllEventsNP();
 
-    void saveEvent(AppEventDTO event);
+    AppEvent saveEvent(AppEventDTO event);
 
     void saveEvent(AppEvent event);
 
