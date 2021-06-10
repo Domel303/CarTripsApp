@@ -25,19 +25,16 @@ function UserList() {
     }, {
         dataField: 'email',
         text: 'email'
-    }, {
-        dataField: 'car',
-        text: 'Auto'
     }];
 
     useEffect(() => {
-        getEvents(maxPage, (response) => {
-            parseEvent(response)
+        getUsers(maxPage, (response) => {
+            parseUser(response)
         })
     }, [maxPage])
 
-    const getEvents = (page, onResponseReceived) => {
-        BackendService.getAllEvents(page, SIZE)
+    const getUsers = (page, onResponseReceived) => {
+        BackendService.getAllUsers(page, SIZE)
             .then(
                 response => {
                     onResponseReceived(response.data)
@@ -48,7 +45,7 @@ function UserList() {
             )
     }
 
-    const parseEvent = (response) => {
+    const parseUser = (response) => {
         if (response && response.content && response.content.length > 0) {
             setUsers(response.content)
 
@@ -78,8 +75,8 @@ function UserList() {
                         detailUrl={undefined}
                         maxPage={maxPage}
                         onNewItemsRequest={(page) => {
-                            getEvents(page, (response) => {
-                                parseEvent(response)
+                            getUsers(page, (response) => {
+                                parseUser(response)
                             })
                         }}
                     />

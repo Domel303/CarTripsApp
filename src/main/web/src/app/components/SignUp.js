@@ -4,9 +4,10 @@ import {Input, Label} from "reactstrap"
 import {Alert} from "react-bootstrap"
 
 import Authentication from '../services/AuthenticationService'
+import {useHistory} from "react-router-dom";
 
 function SignUp() {
-  const [user, setUser] = useState({username: undefined, password: undefined, email: undefined})
+  const [user, setUser] = useState({username: undefined, password: undefined, email: undefined, firstname: undefined, lastname: undefined})
   const [message, setMessage] = useState(undefined)
   const [error, setError] = useState(undefined)
 
@@ -15,6 +16,7 @@ function SignUp() {
     setUser({...user, [name]: value})
   }
 
+  const history = useHistory()
   const register = function (e) {
     e.preventDefault()
 
@@ -25,6 +27,7 @@ function SignUp() {
             response => {setMessage(response.data.message)},
             error => {setError(error.toString())}
         )
+    history.push("/home")
   }
 
   const validateEmail = (email) => {
@@ -39,6 +42,20 @@ function SignUp() {
         <Row><Col>{message && <Alert variant={'success'}>{message}</Alert> }</Col></Row>
         <Row><Col>
           <Form onSubmit={register}>
+            <FormGroup style={{marginTop : "1em"}} controlId="firstname">
+              <Label for="firstname">Firstname</Label>
+              <Input type="text" placeholder="Enter your Firstname" name="firstname"
+                     id="firstname" value={user?.firstname} autoComplete="firstname"
+                     onChange={(e) => {changeValueHandler(e.target.name, e.target.value)}}/>
+            </FormGroup>
+
+            <FormGroup style={{marginTop : "1em"}} controlId="lastname">
+              <Label for="lastname">Lastname</Label>
+              <Input type="text" placeholder="Enter your Lastname" name="lastname"
+                     id="lastname" value={user?.lastname} autoComplete="lastname"
+                     onChange={(e) => {changeValueHandler(e.target.name, e.target.value)}}/>
+            </FormGroup>
+
             <FormGroup style={{marginTop : "1em"}} controlId="forUsername">
               <Label for="username">Username</Label>
               <Input type="text" placeholder="Enter your username" name="username"

@@ -64,7 +64,7 @@ const BackendService = {
 
     //user function
     getAllUsers: async function(page, size){
-        let url = `${SERVER_PREFIX}/api/users`
+        let url = `${SERVER_PREFIX}/api/users/`
 
         if (page !== undefined) url += `?page=${page}`
         if (size !== undefined) url += `&size=${size}`
