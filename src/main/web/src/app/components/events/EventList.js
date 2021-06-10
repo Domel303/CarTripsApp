@@ -9,12 +9,14 @@ function EventList() {
     const [maxPage, setMaxPage] = useState(0)
     const [error, setError] = useState("")
 
-    const SIZE = 15
+    const SIZE= 1
 
     const history = useHistory()
 
     const onDelete = (id) => {
-        BackendService.deleteEvent(id).then()
+        BackendService.deleteEvent(id).then((response) => {
+            setEvents(events.filter((item)=> item.id !== id ))
+        })
     }
 
     const actionsFormatter = (cell, row) =>
@@ -109,8 +111,10 @@ function EventList() {
                         properties={properties}
                         detailUrl={undefined}
                         maxPage={maxPage}
+                        sizePerPage={SIZE}
                         onNewItemsRequest={(page) => {
-                            getEvents(page, (response) => {
+                            getEvents(page - 1, (response) => {
+                                console.log(response)
                                 parseEvent(response)
                             })
                         }}

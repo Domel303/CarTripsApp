@@ -58,8 +58,8 @@ const BackendService = {
 
         return await axios.get(url)
     },
-    deleteEvent: async function(event){
-        return await axios.delete(`${SERVER_PREFIX}/api/events/${event.id}`)
+    deleteEvent: async function(id){
+        return await axios.delete(`${SERVER_PREFIX}/api/events/${id}`)
     },
 
     //user function
