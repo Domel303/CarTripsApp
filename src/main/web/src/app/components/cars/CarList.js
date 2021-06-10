@@ -9,12 +9,14 @@ function CarList() {
     const [maxPage, setMaxPage] = useState(0)
     const [error, setError] = useState("")
 
-    const SIZE = 15
+    const SIZE = 1
 
     const history = useHistory()
 
     const onDelete = (id) => {
-        BackendService.deleteCar(id).then()
+        BackendService.deleteCar(id).then((response) => {
+            setCars(cars.filter((item)=> item.id !== id ))
+        })
     }
 
     const actionsFormatter = (cell, row) =>
@@ -93,8 +95,9 @@ function CarList() {
                         properties={properties}
                         detailUrl={undefined}
                         maxPage={maxPage}
+                        sizePerPage={SIZE}
                         onNewItemsRequest={(page) => {
-                            getCars(page, (response) => {
+                            getCars(page-1, (response) => {
                                 parseCar(response)
                             })
                         }}

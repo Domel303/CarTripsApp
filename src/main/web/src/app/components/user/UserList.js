@@ -8,7 +8,7 @@ function UserList() {
     const [maxPage, setMaxPage] = useState(0)
     const [error, setError] = useState("")
 
-    const SIZE = 15
+    const SIZE = 1
 
     const properties = [{
         dataField: 'id',
@@ -74,8 +74,9 @@ function UserList() {
                         properties={properties}
                         detailUrl={undefined}
                         maxPage={maxPage}
+                        sizePerPage={SIZE}
                         onNewItemsRequest={(page) => {
-                            getUsers(page, (response) => {
+                            getUsers(page-1, (response) => {
                                 parseUser(response)
                             })
                         }}

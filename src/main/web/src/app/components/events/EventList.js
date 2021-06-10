@@ -114,7 +114,6 @@ function EventList() {
                         sizePerPage={SIZE}
                         onNewItemsRequest={(page) => {
                             getEvents(page - 1, (response) => {
-                                console.log(response)
                                 parseEvent(response)
                             })
                         }}

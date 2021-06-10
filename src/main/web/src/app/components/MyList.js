@@ -4,8 +4,6 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, {
     PaginationProvider,
     PaginationListStandalone,
-    PaginationTotalStandalone,
-    SizePerPageDropdownStandalone
 } from 'react-bootstrap-table2-paginator';
 
 function MyList({properties, items, detailUrl,sizePerPage, maxPage, onNewItemsRequest}) {
@@ -25,7 +23,7 @@ function MyList({properties, items, detailUrl,sizePerPage, maxPage, onNewItemsRe
                     paginationFactory({
                         custom: true,
                         page: actualPage,
-                        sizePerPage:1,
+                        sizePerPage: sizePerPage,
                         totalSize: maxPage
                     })
                 }
