@@ -3,7 +3,6 @@ package com.cars.trip.onlinetrips.service;
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.authentication.repository.UserRepository;
 import com.cars.trip.onlinetrips.entity.Car;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

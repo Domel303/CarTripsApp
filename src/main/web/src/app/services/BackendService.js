@@ -70,6 +70,9 @@ const BackendService = {
         if (size !== undefined) url += `&size=${size}`
 
         return await axios.get(url)
+    },
+    getMyCar: async function(username){
+        return await axios.get(`${SERVER_PREFIX}/api/users/${username}`)
     }
 
 

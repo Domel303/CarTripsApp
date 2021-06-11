@@ -9,7 +9,7 @@ const AddCar = () => {
         carBrand: undefined,
         carModel: undefined,
         countryOfOrigin: undefined,
-        enginePowerKW: undefined,
+        enginePowerKW: undefined
     });
 
     const history = useHistory()

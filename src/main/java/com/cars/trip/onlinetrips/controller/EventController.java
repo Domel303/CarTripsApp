@@ -4,13 +4,14 @@ import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.authentication.security.services.UserPrinciple;
 import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
-import com.cars.trip.onlinetrips.dto.UserEventDTO;
 import com.cars.trip.onlinetrips.service.EventService;
 import com.cars.trip.onlinetrips.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -29,6 +30,11 @@ public class EventController {
     public Page<AppEvent> getAllEvents(@RequestParam(required = false) int page,
                                        @RequestParam(required = false) int size) {
         return eventService.getAllEvents(page, size);
+    }
+
+    @GetMapping(path = "/{eventId")
+    public List<AppEvent> getUsersEvents(@PathVariable("eventId") Long id){
+        return eventService.getUsersEvents(id);
     }
 
     @PostMapping
@@ -50,10 +56,10 @@ public class EventController {
 
     @PostMapping("/register")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public void registerIntoEvent(@RequestBody UserEventDTO userEventDTO) {
+    public void registerIntoEvent(@RequestParam Long id) {
         UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.getUserByUsername(principles.getUsername());
-        AppEvent event = eventService.getEvent(userEventDTO.getEventId());
+        AppEvent event = eventService.getEvent(id);
         event.getSingedUsers().add(user);
         eventService.saveEvent(event);
     }

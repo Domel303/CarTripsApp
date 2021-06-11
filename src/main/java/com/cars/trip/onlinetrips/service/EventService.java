@@ -14,11 +14,11 @@ public interface EventService {
 
     Page<AppEvent> getAllEvents(int page, int size);
 
-    List<AppEvent> getAllEventsNP();
-
     AppEvent saveEvent(AppEventDTO event);
 
     void saveEvent(AppEvent event);
+
+    List<AppEvent> getUsersEvents(Long id);
 
     void deleteEvent(Long id);
 

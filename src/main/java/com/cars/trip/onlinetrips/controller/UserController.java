@@ -1,9 +1,11 @@
 package com.cars.trip.onlinetrips.controller;
 
 import com.cars.trip.onlinetrips.authentication.model.User;
+import com.cars.trip.onlinetrips.authentication.security.services.UserPrinciple;
 import com.cars.trip.onlinetrips.entity.Car;
 import com.cars.trip.onlinetrips.service.UserService;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +18,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/")
+    public Car getMyCar(){
+        UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userService.getCar(principles.getUsername());
+    }
+
     @GetMapping("/{userName}")
-    public Car getUserCar(@PathVariable("userName") String userName){
+    public Car getUserCar(@PathVariable("userName") String userName) {
         return userService.getCar(userName);
     }
 

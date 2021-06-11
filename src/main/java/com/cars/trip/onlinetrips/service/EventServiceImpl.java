@@ -1,5 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
+import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
 import com.cars.trip.onlinetrips.repository.EventRepository;
@@ -32,11 +33,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<AppEvent> getAllEventsNP(){
-        return eventRepository.findAll();
-    }
-
-    @Override
     public AppEvent saveEvent(AppEventDTO eventDTO){
         AppEvent event = mapEventDTOToEvent(eventDTO);
        return eventRepository.save(event);
@@ -60,6 +56,12 @@ public class EventServiceImpl implements EventService {
 
         return event;
     }
+
+    @Override
+    public List<AppEvent> getUsersEvents(Long id){
+    return eventRepository.findAllBySingedUsers(id);
+    }
+
     @Override
     public void deleteEvent(Long id){
         boolean exist = eventRepository.existsById(id);
