@@ -30,8 +30,8 @@ const BackendService = {
         return await axios.post(`${SERVER_PREFIX}/api/cars/`,car)
     },
 
-    deleteCar: async function (car) {
-        return await axios.delete(`${SERVER_PREFIX}/api/cars/${car.id}`)
+    deleteCar: async function (id) {
+        return await axios.delete(`${SERVER_PREFIX}/api/cars/${id}`)
     },
 
     getAllCars: async function(page, size){

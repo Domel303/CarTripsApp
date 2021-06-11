@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Button, Form, Input} from "reactstrap";
+import {Button, Form, Input, Label} from "reactstrap";
 import BackendService from "../../services/BackendService";
 import {useHistory} from "react-router-dom";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddEvent= () =>{
 
@@ -15,6 +18,7 @@ const AddEvent= () =>{
         description:undefined
     });
 
+    const [startDate, setStartDate] = useState(new Date());
 
     const history = useHistory()
 
@@ -62,12 +66,14 @@ const AddEvent= () =>{
                     <Input placeholder="duration" name='duration' onChange={(event) => {
                         changeValue(event)
                     }}/>
-                    <Input placeholder="dateOfEvent" name='dateOfEvent' onChange={(event) => {
-                        changeValue(event)
-                    }}/>
                     <Input placeholder="description" name='description' onChange={(event) => {
                         changeValue(event)
                     }}/>
+                    <DatePicker dateFormat="dd/MM/yyyy" name = 'dateOfEvent' selected={startDate} onChange={(date) => {
+                        setStartDate(date)
+                        changeValue({dateOfEvent:date})
+                    }} />
+
 
                     <Button type="submit">Add event</Button>
                 </Form>

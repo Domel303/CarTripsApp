@@ -11,7 +11,6 @@ function MyList({properties, items, detailUrl,sizePerPage, maxPage, onNewItemsRe
     const history = useHistory()
 
     const handleTableChange = (type, { page, sizePerPage }) => {
-        console.log(page)
         onNewItemsRequest(page)
         setActualPage(page)
     }
@@ -34,10 +33,6 @@ function MyList({properties, items, detailUrl,sizePerPage, maxPage, onNewItemsRe
                          paginationTableProps
                      }) => (
                         <div>
-                            <div>
-                                <p>Current Page: { paginationProps.page }</p>
-                                <p>Current SizePerPage: { paginationProps.sizePerPage }</p>
-                            </div>
                             <div>
                                 <PaginationListStandalone
                                     { ...paginationProps }
