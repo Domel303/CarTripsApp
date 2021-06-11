@@ -76,6 +76,9 @@ const BackendService = {
     },
     getUsersEvents: async function(){
         return await axios.get(`${SERVER_PREFIX}/api/events/event`)
+    },
+    getEventsUsers: async function(id){
+        return await axios.get(`${SERVER_PREFIX}/api/events/user/${id}`)
     }
 
 

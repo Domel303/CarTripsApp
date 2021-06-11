@@ -28,7 +28,8 @@ function AppNavbar() {
                 {user && <Nav.Link href="/#/eventFormular">Create event</Nav.Link>}
                 {user && <Nav.Link href="/#/carList">Cars</Nav.Link>}
                 {user && <Nav.Link href="/#/userList">Users</Nav.Link>}
-                {user && <Nav.Link href="/#/userEvents">Users Events</Nav.Link>}
+                {user && <Nav.Link href="/#/userEvents">My events</Nav.Link>}
+                {user && <Nav.Link href="/#/eventsUsers">Users on event</Nav.Link>}
                 {user && <Nav.Link><Button variant={'danger'} onClick={() => {
                     signOut()
                 }}>Sign out</Button></Nav.Link>}

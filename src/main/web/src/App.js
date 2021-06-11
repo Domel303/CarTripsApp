@@ -12,6 +12,7 @@ import CarList from "./app/components/cars/CarList";
 import CarFormular from "./app/components/cars/CarForm";
 import UserList from "./app/components/user/UserList";
 import UserEvents from "./app/components/user/UserEvents";
+import EventsUsers from "./app/components/events/EventsUsers";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                         <Route path='/signin' exact={true} component={Login}/>
                         <Route path='/signup' exact={true} component={SignUp}/>
                         <Route path='/userEvents' exact={true} component={UserEvents}/>
+                        <Route path='/eventsUsers' exact={true} component={EventsUsers}/>
                     </Switch>
                 </HashRouter>
             </Container>
