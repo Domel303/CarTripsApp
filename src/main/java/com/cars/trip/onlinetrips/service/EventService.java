@@ -1,5 +1,6 @@
 package com.cars.trip.onlinetrips.service;
 
+import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
 import org.springframework.data.domain.Page;
@@ -18,7 +19,9 @@ public interface EventService {
 
     void saveEvent(AppEvent event);
 
-    List<AppEvent> getUsersEvents(Long id);
+    List<AppEvent> getUsersEvents(User user);
+
+    List<User> getEventsUsers(Long id);
 
     void deleteEvent(Long id);
 

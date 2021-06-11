@@ -11,6 +11,7 @@ import EventFormular from "./app/components/events/EventForm";
 import CarList from "./app/components/cars/CarList";
 import CarFormular from "./app/components/cars/CarForm";
 import UserList from "./app/components/user/UserList";
+import UserEvents from "./app/components/user/UserEvents";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                         <Route path='/carList' exaxt={true} component={CarList}/>
                         <Route path='/signin' exact={true} component={Login}/>
                         <Route path='/signup' exact={true} component={SignUp}/>
+                        <Route path='/userEvents' exact={true} component={UserEvents}/>
                     </Switch>
                 </HashRouter>
             </Container>

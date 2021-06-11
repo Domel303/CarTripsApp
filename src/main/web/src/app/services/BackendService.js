@@ -73,7 +73,11 @@ const BackendService = {
     },
     getMyCar: async function(username){
         return await axios.get(`${SERVER_PREFIX}/api/users/${username}`)
+    },
+    getUsersEvents: async function(){
+        return await axios.get(`${SERVER_PREFIX}/api/events/event`)
     }
+
 
 
 }

@@ -58,8 +58,16 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<AppEvent> getUsersEvents(Long id){
-    return eventRepository.findAllBySingedUsers(id);
+    public List<AppEvent> getUsersEvents(User user){
+    return eventRepository.findAllBySingedUsers(user);
+    }
+
+    @Override
+    public List<User> getEventsUsers(Long id){
+        AppEvent event = eventRepository.findById(id).
+                orElseThrow(() -> new IllegalStateException("Event with id"+ id+ " could not be found") );
+
+        return event.getSingedUsers();
     }
 
     @Override

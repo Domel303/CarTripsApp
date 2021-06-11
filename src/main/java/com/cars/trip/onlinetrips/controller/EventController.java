@@ -32,10 +32,18 @@ public class EventController {
         return eventService.getAllEvents(page, size);
     }
 
-    @GetMapping(path = "/{eventId")
-    public List<AppEvent> getUsersEvents(@PathVariable("eventId") Long id){
-        return eventService.getUsersEvents(id);
+    @GetMapping(path = "/event")
+    public List<AppEvent> getUsersEvents(){
+        UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.getUserByUsername(principles.getUsername());
+        return eventService.getUsersEvents(user);
     }
+
+    @GetMapping(path = "/user/{eventId}")
+    public List<User> getEventsUsers(@PathVariable("eventId") Long id){
+        return eventService.getEventsUsers(id);
+    }
+
 
     @PostMapping
     public AppEvent createNewEvent(@RequestBody AppEventDTO eventDTO) {
