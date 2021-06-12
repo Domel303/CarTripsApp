@@ -13,6 +13,7 @@ import CarFormular from "./app/components/cars/CarForm";
 import UserList from "./app/components/user/UserList";
 import UserEvents from "./app/components/user/UserEvents";
 import EventsUsers from "./app/components/events/EventsUsers";
+import UserCar from "./app/components/user/UserCar";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                         <Route path='/signup' exact={true} component={SignUp}/>
                         <Route path='/userEvents' exact={true} component={UserEvents}/>
                         <Route path='/eventsUsers/:id' exact={true} component={EventsUsers}/>
+                        <Route path='/userCar/:username' exact={true} component={UserCar}/>
                     </Switch>
                 </HashRouter>
             </Container>

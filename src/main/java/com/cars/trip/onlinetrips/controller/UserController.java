@@ -30,7 +30,7 @@ public class UserController {
         return userService.getCar(principles.getUsername());
     }
 
-    @GetMapping("/{userName}")
+    @GetMapping("/userCar/{userName}")
     public Car getUserCar(@PathVariable("userName") String userName) {
         return userService.getCar(userName);
     }

@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react"
 import BackendService from "../../services/BackendService"
-import {Alert, Col, Container, Row} from "react-bootstrap";
+import {Alert, Button, Col, Container, Row} from "react-bootstrap";
 import MyList from "../MyList";
+import {useHistory} from "react-router-dom";
 
 function UserList() {
     const [users, setUsers] = useState([])
@@ -9,6 +10,18 @@ function UserList() {
     const [error, setError] = useState("")
 
     const SIZE = 1
+    const history = useHistory()
+
+    const eventsUserFormatter = (cell, row) =>
+        <Button type="submit" onClick={(event) => {
+            console.log(row.username)
+            getUsersCar(row.username)
+        }}>Car</Button>
+
+    const getUsersCar = (username)=>{
+        console.log(username)
+        history.push("/userCar/" + username)
+    }
 
     const properties = [{
         dataField: 'id',
@@ -25,6 +38,12 @@ function UserList() {
     }, {
         dataField: 'email',
         text: 'email'
+    }, {
+        dataField: 'getUser',
+        text: 'Users',
+        isDummyField: true,
+        csvExport: false,
+        formatter: eventsUserFormatter
     }];
 
     useEffect(() => {
