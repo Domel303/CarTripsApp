@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const AddEvent = () => {
+const EventForm = () => {
 
     const [newItem, setNewItem] = useState({
         start: undefined,
@@ -96,4 +96,4 @@ const AddEvent = () => {
     );
 }
 
-export default AddEvent
+export default EventForm

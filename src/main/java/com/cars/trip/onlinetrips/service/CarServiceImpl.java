@@ -83,8 +83,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getAllCarsNP() {
-        return carRepository.findAll();
+    public Car getCar(Long id){
+        return carRepository.findById(id).orElseThrow(() -> new IllegalStateException("Car with id "+ id+ "could not be found"));
     }
 
 }

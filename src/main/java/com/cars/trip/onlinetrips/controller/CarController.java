@@ -32,6 +32,10 @@ public class CarController {
         return carService.getAllCars(page,size);
     }
 
+    @GetMapping(path = "/car/{id}")
+    public Car getCar(@PathVariable("id") Long id){
+        return carService.getCar(id);
+    }
 
     @PostMapping
     public Car createNewCar(@RequestBody CarsDTO userCarDTO) {

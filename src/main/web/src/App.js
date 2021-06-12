@@ -7,13 +7,13 @@ import Profile from './app/components/Profile';
 import SignUp from './app/components/SignUp';
 import AppNavbar from "./app/components/AppNavbar";
 import Login from "./app/components/Login";
-import EventFormular from "./app/components/events/EventForm";
 import CarList from "./app/components/cars/CarList";
-import CarFormular from "./app/components/cars/CarForm";
 import UserList from "./app/components/user/UserList";
 import UserEvents from "./app/components/user/UserEvents";
 import EventsUsers from "./app/components/events/EventsUsers";
 import UserCar from "./app/components/user/UserCar";
+import CarForm from "./app/components/cars/CarForm";
+import EventForm from "./app/components/events/EventForm";
 
 function App() {
     return (
@@ -25,8 +25,8 @@ function App() {
                         <Route path='/' exact={true} component={Home}/>
                         <Route path='/home' exact={true} component={Home}/>
                         <Route path='/profile' exact={true} component={Profile}/>
-                        <Route path='/eventFormular/:id' exaxt={true} component={EventFormular}/>
-                        <Route path='/carFormular' exaxt={true} component={CarFormular}/>
+                        <Route path='/eventFormular/:id' exaxt={true} component={EventForm}/>
+                        <Route path='/carFormular/:id' exaxt={true} component={CarForm}/>
                         <Route path='/userList' exaxt={true} component={UserList}/>
                         <Route path='/carList' exaxt={true} component={CarList}/>
                         <Route path='/signin' exact={true} component={Login}/>

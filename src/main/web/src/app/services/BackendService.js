@@ -33,6 +33,12 @@ const BackendService = {
     deleteCar: async function (id) {
         return await axios.delete(`${SERVER_PREFIX}/api/cars/${id}`)
     },
+    getCar: async function (id) {
+        return await axios.get(`${SERVER_PREFIX}/api/cars/car/${id}`)
+    },
+    putCar: async function(car){
+        return await axios.put(`${SERVER_PREFIX}/api/cars/`,car)
+    },
 
     getAllCars: async function (page, size) {
         let url = `${SERVER_PREFIX}/api/cars/`

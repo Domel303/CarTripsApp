@@ -24,7 +24,13 @@ function CarList() {
             onDelete(row.id)
         }}>Delete</Button>
 
-
+    const updateFormatter = (cell, row) =>
+        <Button type="submit" onClick={(event) => {
+            updateCar(row.id)
+        }}>Update</Button>
+    const updateCar = (id) =>{
+        history.push("/carFormular/" + id)
+    }
     const properties = [{
         dataField: 'id',
         text: 'Id'
@@ -46,6 +52,12 @@ function CarList() {
         isDummyField: true,
         csvExport: false,
         formatter: actionsFormatter
+    }, {
+        dataField: 'update',
+        text: 'Update',
+        isDummyField: true,
+        csvExport: false,
+        formatter: updateFormatter
     }];
 
     useEffect(() => {

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Button, Form, Input} from "reactstrap";
 import BackendService from "../../services/BackendService";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
-const AddCar = () => {
+const CarForm = () => {
 
     const [newItem, setNewItem] = useState({
         carBrand: undefined,
@@ -14,20 +14,26 @@ const AddCar = () => {
 
     const history = useHistory()
 
+    const {id} = useParams()
+
     useEffect(() => {
-        BackendService.getAllCars()
-            .then((resp) => {
-                setNewItem(resp.data)
-            }, (error) => {
-                console.log(error.toString())
+        if (id)
+            BackendService.getCar(id).then(response => {
+                setNewItem(response.data)
             })
-    }, []);
+    }, [id])
 
     const onNewItem = (event) => {
         event.preventDefault()
-        BackendService.postCreateCar(newItem).then((resp) => {
-            history.push("/profile")
-        })
+        if (id) {
+            BackendService.putCar(newItem).then(() => {
+                history.push("/profile")
+            })
+        } else {
+            BackendService.postCreateCar(newItem).then(() =>{
+                history.push("/profile")
+            })
+        }
     }
 
     const changeValue = (event) => {
@@ -62,4 +68,4 @@ const AddCar = () => {
     );
 }
 
-export default AddCar
+export default CarForm

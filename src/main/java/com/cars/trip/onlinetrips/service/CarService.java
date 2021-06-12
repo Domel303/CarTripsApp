@@ -19,5 +19,5 @@ public interface CarService {
 
     void updateCar(CarsDTO carsDTO);
 
-    List<Car> getAllCarsNP();
+    Car getCar(Long id);
 }
