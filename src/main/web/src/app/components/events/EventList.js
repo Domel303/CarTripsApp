@@ -34,7 +34,6 @@ function EventList() {
     const getEventsUser = (id)=>{
         console.log(id)
         history.push("/eventsUsers/" + id)
-        //call EventsUsers
     }
 
 
