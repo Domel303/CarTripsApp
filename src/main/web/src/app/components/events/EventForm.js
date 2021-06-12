@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const AddEvent= () =>{
+const AddEvent = () => {
 
     const [newItem, setNewItem] = useState({
         start: undefined,
@@ -15,7 +15,7 @@ const AddEvent= () =>{
         distance: undefined,
         duration: undefined,
         dateOfEvent: undefined,
-        description:undefined
+        description: undefined
     });
 
     const [startDate, setStartDate] = useState(new Date());
@@ -69,10 +69,15 @@ const AddEvent= () =>{
                     <Input placeholder="description" name='description' onChange={(event) => {
                         changeValue(event)
                     }}/>
-                    <DatePicker dateFormat="dd/MM/yyyy" name = 'dateOfEvent' selected={startDate} onChange={(date) => {
+                    <DatePicker dateFormat="dd/MM/yyyy" name='dateOfEvent' selected={startDate} onChange={(date) => {
                         setStartDate(date)
-                        changeValue({dateOfEvent:date})
-                    }} />
+                        changeValue({
+                            target: {
+                                name: 'dateOfEvent',
+                                value: date
+                            }
+                        })
+                    }}/>
 
 
                     <Button type="submit">Add event</Button>

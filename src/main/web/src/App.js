@@ -31,7 +31,7 @@ function App() {
                         <Route path='/signin' exact={true} component={Login}/>
                         <Route path='/signup' exact={true} component={SignUp}/>
                         <Route path='/userEvents' exact={true} component={UserEvents}/>
-                        <Route path='/eventsUsers' exact={true} component={EventsUsers}/>
+                        <Route path='/eventsUsers/:id' exact={true} component={EventsUsers}/>
                     </Switch>
                 </HashRouter>
             </Container>

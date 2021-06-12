@@ -18,7 +18,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping
+    public Page<User> getAllUsers(@RequestParam(required = false) int page,
+                                  @RequestParam(required = false) int size) {
+        return userService.getAllUsers(page, size);
+    }
+
+    @GetMapping("/car")
     public Car getMyCar(){
         UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userService.getCar(principles.getUsername());
@@ -29,10 +35,6 @@ public class UserController {
         return userService.getCar(userName);
     }
 
-    @GetMapping
-    public Page<User> getAllUsers(@RequestParam(required = false) int page,
-                                  @RequestParam(required = false) int size) {
-        return userService.getAllUsers(page, size);
-    }
+
 
 }

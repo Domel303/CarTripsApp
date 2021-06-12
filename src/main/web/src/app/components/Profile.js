@@ -23,7 +23,7 @@ function Profile() {
     }, [])
 
     const myCar = (user) => {
-        BackendService.getMyCar(user.username).then((response) => {
+        BackendService.getMyCar().then((response) => {
             console.log(response)
             setCar(response.data)
         })

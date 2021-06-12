@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react"
 import BackendService from "../../services/BackendService"
 import {Alert, Col, Container, Row} from "react-bootstrap";
 import MyList from "../MyList";
+import {useParams} from "react-router-dom";
 
-function EventsUser() {
+function EventsUsers() {
     const [user, setUsers] = useState([])
     const [error, setError] = useState("")
+    const {id} = useParams()
 
     const properties = [{
         dataField: 'id',
@@ -25,11 +27,12 @@ function EventsUser() {
     }];
 
     useEffect(()=>{
-        getUsers(2,(response)=>{
+        getUsers(id,(response)=>{
             console.log(response)
             setUsers(response)
         })
-    },[])
+    },[id])
+
     const getUsers = (id, onResponseReceived) => {
         BackendService.getEventsUsers(id)
             .then(
@@ -69,4 +72,4 @@ function EventsUser() {
     )
 }
 
-export default EventsUser;
+export default EventsUsers;
