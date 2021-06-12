@@ -30,7 +30,7 @@ const CarForm = () => {
                 history.push("/profile")
             })
         } else {
-            BackendService.postCreateCar(newItem).then(() =>{
+            BackendService.postCreateCar(newItem).then(() => {
                 history.push("/profile")
             })
         }

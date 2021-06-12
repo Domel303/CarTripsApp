@@ -53,7 +53,8 @@ function Login() {
                                placeholder="Enter Password" autoComplete="password" onChange={changeHandler}/>
                     </FormGroup>
 
-                    <Button type="submit" name="submitButton" id="submitButton" variant="primary" size="lg" block>Sign In</Button>
+                    <Button type="submit" name="submitButton" id="submitButton" variant="primary" size="lg" block>Sign
+                        In</Button>
                     {error && (<Alert color="danger">{error}</Alert>)}
                 </Form>
             </Col>

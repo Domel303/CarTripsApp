@@ -1,16 +1,14 @@
 import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, {
     PaginationProvider,
     PaginationListStandalone,
 } from 'react-bootstrap-table2-paginator';
 
-function MyList({properties, items, detailUrl,sizePerPage, maxPage, onNewItemsRequest}) {
+function MyList({properties, items, sizePerPage, maxPage, onNewItemsRequest}) {
     const [actualPage, setActualPage] = useState(1)
-    const history = useHistory()
 
-    const handleTableChange = (type, { page, sizePerPage }) => {
+    const handleTableChange = (type, {page}) => {
         onNewItemsRequest(page)
         setActualPage(page)
     }
@@ -35,16 +33,16 @@ function MyList({properties, items, detailUrl,sizePerPage, maxPage, onNewItemsRe
                         <div>
                             <div>
                                 <PaginationListStandalone
-                                    { ...paginationProps }
+                                    {...paginationProps}
                                 />
                             </div>
                             <BootstrapTable remote
                                             keyField='id'
-                                            data={ items }
-                                            columns={ properties }
+                                            data={items}
+                                            columns={properties}
 
-                                            onTableChange={ handleTableChange }
-                                            { ...paginationTableProps }
+                                            onTableChange={handleTableChange}
+                                            {...paginationTableProps}
                             />
                         </div>
                     )

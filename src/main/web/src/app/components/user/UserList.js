@@ -13,12 +13,12 @@ function UserList() {
     const history = useHistory()
 
     const eventsUserFormatter = (cell, row) =>
-        <Button type="submit" onClick={(event) => {
+        <Button type="submit" onClick={() => {
             console.log(row.username)
             getUsersCar(row.username)
         }}>Car</Button>
 
-    const getUsersCar = (username)=>{
+    const getUsersCar = (username) => {
         console.log(username)
         history.push("/userCar/" + username)
     }
@@ -95,7 +95,7 @@ function UserList() {
                         maxPage={maxPage}
                         sizePerPage={SIZE}
                         onNewItemsRequest={(page) => {
-                            getUsers(page-1, (response) => {
+                            getUsers(page - 1, (response) => {
                                 parseUser(response)
                             })
                         }}

@@ -26,12 +26,12 @@ function EventsUsers() {
         text: 'email'
     }];
 
-    useEffect(()=>{
-        getUsers(id,(response)=>{
+    useEffect(() => {
+        getUsers(id, (response) => {
             console.log(response)
             setUsers(response)
         })
-    },[id])
+    }, [id])
 
     const getUsers = (id, onResponseReceived) => {
         BackendService.getEventsUsers(id)
@@ -63,7 +63,7 @@ function EventsUsers() {
                         detailUrl={undefined}
                         maxPage={5}
                         sizePerPage={5}
-                        onNewItemsRequest={(page) => {
+                        onNewItemsRequest={() => {
                         }}
                     />
                 </Col>

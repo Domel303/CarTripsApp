@@ -19,7 +19,7 @@ function Home() {
                             <Button color="success"><Link to="/signin"><span
                                 style={{color: "black"}}>Sign in</span></Link></Button>
                             <Button color="warning"><Link to={"/signup"}><span
-                            style={{color: "black"}}>Sign up</span></Link></Button>
+                                style={{color: "black"}}>Sign up</span></Link></Button>
                         </Alert>
                     </div>)
                 }

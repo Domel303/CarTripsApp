@@ -14,21 +14,21 @@ function CarList() {
     const history = useHistory()
 
     const onDelete = (id) => {
-        BackendService.deleteCar(id).then((response) => {
-            setCars(cars.filter((item)=> item.id !== id ))
+        BackendService.deleteCar(id).then(() => {
+            setCars(cars.filter((item) => item.id !== id))
         })
     }
 
     const actionsFormatter = (cell, row) =>
-        <Button type="submit" onClick={(event) => {
+        <Button type="submit" onClick={() => {
             onDelete(row.id)
         }}>Delete</Button>
 
     const updateFormatter = (cell, row) =>
-        <Button type="submit" onClick={(event) => {
+        <Button type="submit" onClick={() => {
             updateCar(row.id)
         }}>Update</Button>
-    const updateCar = (id) =>{
+    const updateCar = (id) => {
         history.push("/carFormular/" + id)
     }
     const properties = [{
@@ -109,7 +109,7 @@ function CarList() {
                         maxPage={maxPage}
                         sizePerPage={SIZE}
                         onNewItemsRequest={(page) => {
-                            getCars(page-1, (response) => {
+                            getCars(page - 1, (response) => {
                                 parseCar(response)
                             })
                         }}

@@ -9,46 +9,46 @@ function EventList() {
     const [maxPage, setMaxPage] = useState(0)
     const [error, setError] = useState("")
 
-    const SIZE= 1
+    const SIZE = 1
 
     const history = useHistory()
 
     const onDelete = (id) => {
-        BackendService.deleteEvent(id).then((response) => {
-            setEvents(events.filter((item)=> item.id !== id ))
+        BackendService.deleteEvent(id).then(() => {
+            setEvents(events.filter((item) => item.id !== id))
         })
     }
 
     const actionsFormatter = (cell, row) =>
-        <Button type="submit" onClick={(event) => {
+        <Button type="submit" onClick={() => {
             onDelete(row.id)
         }}>Delete</Button>
 
     const eventsUserFormatter = (cell, row) =>
-        <Button type="submit" onClick={(event) => {
+        <Button type="submit" onClick={() => {
             getEventsUser(row.id)
         }}>Users</Button>
 
-    const getEventsUser = (id)=>{
+    const getEventsUser = (id) => {
         history.push("/eventsUsers/" + id)
     }
     const registerUserFormatter = (cell, row) =>
-        <Button type="submit" onClick={(event) => {
+        <Button type="submit" onClick={() => {
             registerUser(row.id)
         }}>Register</Button>
 
-    const registerUser = (id) =>{
+    const registerUser = (id) => {
         console.log(id)
         BackendService.registerUser(id).then()
     }
 
     const updateFormatter = (cell, row) =>
-        <Button type="submit" onClick={(event) => {
+        <Button type="submit" onClick={() => {
             updateEvent(row.id)
         }}>Update</Button>
 
-    const updateEvent = (id) =>{
-        history.push("/eventFormular/"+ id)
+    const updateEvent = (id) => {
+        history.push("/eventFormular/" + id)
     }
 
     const properties = [{
@@ -138,7 +138,7 @@ function EventList() {
             </Row>
             <Row>
                 <Col>
-                    <Button onClick={(event) => {
+                    <Button onClick={() => {
                         history.push("/eventFormular")
                     }} variant="outline-primary">Add Event</Button>
                 </Col>

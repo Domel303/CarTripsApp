@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button, Form, Input, Label} from "reactstrap";
+import {Button, Form, Input} from "reactstrap";
 import BackendService from "../../services/BackendService";
 import {useHistory, useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
@@ -25,22 +25,21 @@ const EventForm = () => {
 
     useEffect(() => {
         if (id)
-            BackendService.getEvent(id).then(response =>{
+            BackendService.getEvent(id).then(response => {
                 console.log(id)
                 console.log(response.data)
                 setNewItem(response.data)
-                console.log(newItem)
             })
     }, [id]);
 
     const onNewItem = (event) => {
         event.preventDefault()
-        if (id){
-            BackendService.putEvent(newItem).then( () =>{
+        if (id) {
+            BackendService.putEvent(newItem).then(() => {
                 history.push("/home")
             })
-        }else{
-            BackendService.postCreateEvent(newItem).then((resp) => {
+        } else {
+            BackendService.postCreateEvent(newItem).then(() => {
                 history.push("/home")
             })
         }

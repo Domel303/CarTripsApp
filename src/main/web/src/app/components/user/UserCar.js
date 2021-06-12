@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import BackendService from "../../services/BackendService"
-import {Alert, Col, Container} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import {useParams} from "react-router-dom";
 
 function UserCar() {
@@ -14,13 +14,12 @@ function UserCar() {
     const {username} = useParams()
 
 
-
-    useEffect(()=>{
-        getCar(username,(response)=>{
+    useEffect(() => {
+        getCar(username, (response) => {
             console.log(response)
             setNewItem(response)
         })
-    },[username])
+    }, [username])
 
     const getCar = (username, onResponseReceived) => {
         BackendService.getUserCar(username)

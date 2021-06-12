@@ -19,10 +19,10 @@ function Profile() {
         const user = AuthenticationService.getCurrentUser();
         setUser(user);
         console.log(user)
-        myCar(user);
+        myCar();
     }, [])
 
-    const myCar = (user) => {
+    const myCar = () => {
         BackendService.getMyCar().then((response) => {
             console.log(response)
             setCar(response.data)
@@ -48,7 +48,7 @@ function Profile() {
                         <li>Engine power: {car.enginePowerKW}</li>
                     </ul>
                 </Alert>
-                <Button onClick={(event) => {
+                <Button onClick={() => {
                     history.push("/carFormular")
                 }} variant="outline-primary">Create car</Button>
             </div>

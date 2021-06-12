@@ -8,14 +8,14 @@ function UserEvents() {
     const [error, setError] = useState("")
 
     const registerUserFormatter = (cell, row) =>
-        <Button type="submit" onClick={(event) => {
+        <Button type="submit" onClick={() => {
             unregisterUser(row.id)
         }}>Unregister</Button>
 
-    const unregisterUser = (id) =>{
+    const unregisterUser = (id) => {
         console.log(id)
-        BackendService.unregisterUser(id).then(()=>{
-            setEvents(events.filter((item)=> item.id !== id ))
+        BackendService.unregisterUser(id).then(() => {
+            setEvents(events.filter((item) => item.id !== id))
         })
     }
 
@@ -52,12 +52,12 @@ function UserEvents() {
         formatter: registerUserFormatter
     }];
 
-    useEffect(()=>{
-        getEvents((response)=>{
+    useEffect(() => {
+        getEvents((response) => {
             console.log(response)
             setEvents(response)
         })
-    },[])
+    }, [])
     const getEvents = (onResponseReceived) => {
         BackendService.getUsersEvents()
             .then(
@@ -88,7 +88,7 @@ function UserEvents() {
                         detailUrl={undefined}
                         maxPage={5}
                         sizePerPage={5}
-                        onNewItemsRequest={(page) => {
+                        onNewItemsRequest={() => {
                         }}
                     />
                 </Col>

@@ -1,10 +1,12 @@
 import {Pagination} from "react-bootstrap";
 import React from "react";
 
-function Pages({actualPage, totalPages, onPageChangeHandler}){
+function Pages({actualPage, totalPages, onPageChangeHandler}) {
     const pages = () => {
         let pages = []
-        for(let i = 0; i < totalPages; ++i) {pages.push(i + 1)}
+        for (let i = 0; i < totalPages; ++i) {
+            pages.push(i + 1)
+        }
         return pages
     }
 
@@ -12,15 +14,17 @@ function Pages({actualPage, totalPages, onPageChangeHandler}){
         onPageChangeHandler(page)
     }
 
-    return(
+    return (
         <div>
             {(totalPages > 1) && (
                 <Pagination size="sm">
                     {pages().map((nextPage) => {
-                        if(actualPage === nextPage - 1)
-                            return <Pagination.Item onClick={() => onPageChange(nextPage-1)} active>{nextPage}</Pagination.Item>
+                        if (actualPage === nextPage - 1)
+                            return <Pagination.Item onClick={() => onPageChange(nextPage - 1)}
+                                                    active>{nextPage}</Pagination.Item>
                         else
-                            return <Pagination.Item onClick={() => onPageChange(nextPage-1)}>{nextPage}</Pagination.Item>
+                            return <Pagination.Item
+                                onClick={() => onPageChange(nextPage - 1)}>{nextPage}</Pagination.Item>
                     })}
                 </Pagination>
             )}

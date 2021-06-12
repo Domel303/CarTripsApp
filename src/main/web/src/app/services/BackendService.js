@@ -36,8 +36,8 @@ const BackendService = {
     getCar: async function (id) {
         return await axios.get(`${SERVER_PREFIX}/api/cars/car/${id}`)
     },
-    putCar: async function(car){
-        return await axios.put(`${SERVER_PREFIX}/api/cars/`,car)
+    putCar: async function (car) {
+        return await axios.put(`${SERVER_PREFIX}/api/cars/`, car)
     },
 
     getAllCars: async function (page, size) {
@@ -86,7 +86,7 @@ const BackendService = {
         if (id !== undefined) url += `?id=${id}`
         return await axios.post(url)
     },
-    putEvent: async function(event){
+    putEvent: async function (event) {
         return await axios.put(`${SERVER_PREFIX}/api/events`, event)
     },
     //user function
