@@ -3,7 +3,6 @@ import BackendService from "../../services/BackendService"
 import {useHistory} from "react-router-dom"
 import {Alert, Button, Col, Container, Row} from "react-bootstrap";
 import MyList from "../MyList";
-import EventsUsers from "./EventsUsers";
 
 function EventList() {
     const [events, setEvents] = useState([])
@@ -27,13 +26,20 @@ function EventList() {
 
     const eventsUserFormatter = (cell, row) =>
         <Button type="submit" onClick={(event) => {
-            console.log(row.id)
             getEventsUser(row.id)
         }}>Users</Button>
 
     const getEventsUser = (id)=>{
-        console.log(id)
         history.push("/eventsUsers/" + id)
+    }
+    const registerUserFormatter = (cell, row) =>
+        <Button type="submit" onClick={(event) => {
+            registerUser(row.id)
+        }}>Register</Button>
+
+    const registerUser = (id) =>{
+        console.log(id)
+        BackendService.registerUser(id).then()
     }
 
 
@@ -73,6 +79,12 @@ function EventList() {
         isDummyField: true,
         csvExport: false,
         formatter: eventsUserFormatter
+    }, {
+        dataField: 'register',
+        text: 'Register',
+        isDummyField: true,
+        csvExport: false,
+        formatter: registerUserFormatter
     }];
 
     useEffect(() => {

@@ -82,7 +82,18 @@ const BackendService = {
     },
     getUserCar: async function(username){
         return await axios.get(`${SERVER_PREFIX}/api/users/userCar/${username}`)
+    },
+    registerUser: async function(id){
+        let url = `${SERVER_PREFIX}/api/events/register/`
+        if (id !== undefined) url += `?id=${id}`
+        return await axios.post(url)
+    },
+    unregisterUser: async function(id){
+        let url = `${SERVER_PREFIX}/api/events/unregister/`
+        if (id !== undefined) url += `?id=${id}`
+        return await axios.post(url)
     }
+
 
 
 

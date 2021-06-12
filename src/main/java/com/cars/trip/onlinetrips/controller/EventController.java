@@ -63,7 +63,6 @@ public class EventController {
     }
 
     @PostMapping("/register")
-    @PreAuthorize("hasRole('ROLE_USER')")
     public void registerIntoEvent(@RequestParam Long id) {
         UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.getUserByUsername(principles.getUsername());
@@ -72,4 +71,12 @@ public class EventController {
         eventService.saveEvent(event);
     }
 
+    @PostMapping("/unregister")
+    public void unregisterFromEvent(@RequestParam Long id) {
+        UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.getUserByUsername(principles.getUsername());
+        AppEvent event = eventService.getEvent(id);
+        event.getSingedUsers().remove(user);
+        eventService.saveEvent(event);
+    }
 }
