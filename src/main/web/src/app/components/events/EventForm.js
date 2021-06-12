@@ -8,7 +8,15 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const EventForm = () => {
 
-    const [newItem, setNewItem] = useState({});
+    const [newItem, setNewItem] = useState({
+        start: undefined,
+        destination:undefined,
+        carCulture:undefined,
+        distance:undefined,
+        duration:undefined,
+        description:undefined,
+        dateOfEvent:undefined
+    });
     const {id} = useParams()
 
     const [startDate, setStartDate] = useState(new Date());
@@ -22,7 +30,7 @@ const EventForm = () => {
                 console.log(response.data)
                 setNewItem(response.data)
             })
-    }, []);
+    }, [id]);
 
     const onNewItem = (event) => {
         event.preventDefault()
@@ -51,22 +59,22 @@ const EventForm = () => {
                 <Form onSubmit={(event) => {
                     onNewItem(event)
                 }}>
-                    <Input placeholder="start" value={newItem?.start||""} name='start' onChange={(event) => {
+                    <Input placeholder="start" value={newItem?.start || ""} name='start' onChange={(event) => {
                         changeValue(event)
                     }}/>
-                    <Input placeholder="destination" name='destination' onChange={(event) => {
+                    <Input placeholder="destination" value={newItem?.destination||""} name='destination' onChange={(event) => {
                         changeValue(event)
                     }}/>
-                    <Input placeholder="carCulture" name='carCulture' onChange={(event) => {
+                    <Input placeholder="carCulture" value={newItem?.carCulture||""} name='carCulture' onChange={(event) => {
                         changeValue(event)
                     }}/>
-                    <Input placeholder="distance" name='distance' onChange={(event) => {
+                    <Input placeholder="distance" value={newItem?.distance||""} name='distance' onChange={(event) => {
                         changeValue(event)
                     }}/>
-                    <Input placeholder="duration" name='duration' onChange={(event) => {
+                    <Input placeholder="duration" value={newItem?.duration||""} name='duration' onChange={(event) => {
                         changeValue(event)
                     }}/>
-                    <Input placeholder="description" name='description' onChange={(event) => {
+                    <Input placeholder="description" value={newItem?.description||""} name='description' onChange={(event) => {
                         changeValue(event)
                     }}/>
                     <DatePicker dateFormat="dd/MM/yyyy" name='dateOfEvent' selected={startDate} onChange={(date) => {

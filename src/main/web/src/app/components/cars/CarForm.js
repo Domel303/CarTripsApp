@@ -49,18 +49,20 @@ const CarForm = () => {
                 <Form onSubmit={(event) => {
                     onNewItem(event)
                 }}>
-                    <Input placeholder="Znacka" name='carBrand' onChange={(event) => {
+                    <Input placeholder="Znacka" value={newItem?.carBrand || ""} name='carBrand' onChange={(event) => {
                         changeValue(event)
                     }}/>
-                    <Input placeholder="Model" name='carModel' onChange={(event) => {
+                    <Input placeholder="Model" value={newItem?.carModel || ""} name='carModel' onChange={(event) => {
                         changeValue(event)
                     }}/>
-                    <Input placeholder="Zeme vyroby" name='countryOfOrigin' onChange={(event) => {
-                        changeValue(event)
-                    }}/>
-                    <Input placeholder="Vykon" name='enginePowerKW' onChange={(event) => {
-                        changeValue(event)
-                    }}/>
+                    <Input placeholder="Zeme vyroby" value={newItem?.countryOfOrigin || ""} name='countryOfOrigin'
+                           onChange={(event) => {
+                               changeValue(event)
+                           }}/>
+                    <Input placeholder="Vykon" value={newItem?.enginePowerKW || ""} name='enginePowerKW'
+                           onChange={(event) => {
+                               changeValue(event)
+                           }}/>
                     <Button type="submit">Add car</Button>
                 </Form>
             </div>

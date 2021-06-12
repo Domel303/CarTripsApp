@@ -25,7 +25,6 @@ function AppNavbar() {
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Nav className="mr-auto">
                 {user && <Nav.Link href="/#/profile">Profile</Nav.Link>}
-                {user && <Nav.Link href="/#/eventFormular">Create event</Nav.Link>}
                 {user && <Nav.Link href="/#/carList">Cars</Nav.Link>}
                 {user && <Nav.Link href="/#/userList">Users</Nav.Link>}
                 {user && <Nav.Link href="/#/userEvents">My events</Nav.Link>}

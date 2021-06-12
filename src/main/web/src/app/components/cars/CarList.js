@@ -29,7 +29,7 @@ function CarList() {
             updateCar(row.id)
         }}>Update</Button>
     const updateCar = (id) => {
-        history.push("/carFormular/" + id)
+        history.push("/carFormular/edit/" + id)
     }
     const properties = [{
         dataField: 'id',

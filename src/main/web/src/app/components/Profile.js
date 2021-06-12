@@ -49,7 +49,7 @@ function Profile() {
                     </ul>
                 </Alert>
                 <Button onClick={() => {
-                    history.push("/carFormular")
+                    history.push("/carFormular/add")
                 }} variant="outline-primary">Create car</Button>
             </div>
         );

@@ -48,7 +48,7 @@ function EventList() {
         }}>Update</Button>
 
     const updateEvent = (id) => {
-        history.push("/eventFormular/" + id)
+        history.push("/eventFormular/edit/" + id)
     }
 
     const properties = [{
@@ -139,7 +139,7 @@ function EventList() {
             <Row>
                 <Col>
                     <Button onClick={() => {
-                        history.push("/eventFormular")
+                        history.push("/eventFormular/add")
                     }} variant="outline-primary">Add Event</Button>
                 </Col>
             </Row>
