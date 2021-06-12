@@ -1,11 +1,24 @@
 import React, {useEffect, useState} from "react"
 import BackendService from "../../services/BackendService"
-import {Alert, Col, Container, Row} from "react-bootstrap";
+import {Alert, Button, Col, Container, Row} from "react-bootstrap";
 import MyList from "../MyList";
 
 function UserEvents() {
     const [events, setEvents] = useState([])
     const [error, setError] = useState("")
+
+    const registerUserFormatter = (cell, row) =>
+        <Button type="submit" onClick={(event) => {
+            unregisterUser(row.id)
+        }}>Unregister</Button>
+
+    const unregisterUser = (id) =>{
+        console.log(id)
+        BackendService.unregisterUser(id).then(()=>{
+            setEvents(events.filter((item)=> item.id !== id ))
+        })
+    }
+
 
     const properties = [{
         dataField: 'id',
@@ -31,6 +44,12 @@ function UserEvents() {
     }, {
         dataField: 'description',
         text: 'Popis'
+    }, {
+        dataField: 'unregister',
+        text: 'Unregister',
+        isDummyField: true,
+        csvExport: false,
+        formatter: registerUserFormatter
     }];
 
     useEffect(()=>{

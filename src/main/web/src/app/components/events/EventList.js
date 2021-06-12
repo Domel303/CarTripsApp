@@ -42,6 +42,14 @@ function EventList() {
         BackendService.registerUser(id).then()
     }
 
+    const updateFormatter = (cell, row) =>
+        <Button type="submit" onClick={(event) => {
+            updateEvent(row.id)
+        }}>Update</Button>
+
+    const updateEvent = (id) =>{
+        history.push("/eventFormular/"+ id)
+    }
 
     const properties = [{
         dataField: 'id',
@@ -85,6 +93,12 @@ function EventList() {
         isDummyField: true,
         csvExport: false,
         formatter: registerUserFormatter
+    }, {
+        dataField: 'update',
+        text: 'Update',
+        isDummyField: true,
+        csvExport: false,
+        formatter: updateFormatter
     }];
 
     useEffect(() => {

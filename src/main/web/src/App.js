@@ -25,7 +25,7 @@ function App() {
                         <Route path='/' exact={true} component={Home}/>
                         <Route path='/home' exact={true} component={Home}/>
                         <Route path='/profile' exact={true} component={Profile}/>
-                        <Route path='/eventFormular' exaxt={true} component={EventFormular}/>
+                        <Route path='/eventFormular/:id' exaxt={true} component={EventFormular}/>
                         <Route path='/carFormular' exaxt={true} component={CarFormular}/>
                         <Route path='/userList' exaxt={true} component={UserList}/>
                         <Route path='/carList' exaxt={true} component={CarList}/>

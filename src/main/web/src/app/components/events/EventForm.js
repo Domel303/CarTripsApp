@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Button, Form, Input, Label} from "reactstrap";
 import BackendService from "../../services/BackendService";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,25 +17,34 @@ const AddEvent = () => {
         dateOfEvent: undefined,
         description: undefined
     });
+    const {id} = useParams()
 
     const [startDate, setStartDate] = useState(new Date());
 
     const history = useHistory()
 
     useEffect(() => {
-        BackendService.getAllEvents()
-            .then((resp) => {
-                setNewItem(resp.data)
-            }, (error) => {
-                console.log(error.toString())
+        if (id)
+            BackendService.getEvent(id).then(response =>{
+                console.log(id)
+                console.log(response.data)
+                setNewItem(response.data)
+                console.log(newItem)
             })
-    }, []);
+    }, [id]);
 
     const onNewItem = (event) => {
         event.preventDefault()
-        BackendService.postCreateEvent(newItem).then((resp) => {
-            history.push("/home")
-        })
+        if (id){
+            BackendService.putEvent(newItem).then( () =>{
+                history.push("/home")
+            })
+        }else{
+            BackendService.postCreateEvent(newItem).then((resp) => {
+                history.push("/home")
+            })
+        }
+
     }
 
     const changeValue = (event) => {

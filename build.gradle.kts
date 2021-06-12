@@ -27,6 +27,10 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.h2database:h2")
     testImplementation("org.mockito:mockito-core")
+
+    runtimeOnly("org.postgresql:postgresql")
+
+
 }
 //tasks.register<com.github.gradle.node.npm.task.NpmTask>("appNpmInstall") {
 //    description = "Installs all dependencies from package.json"
