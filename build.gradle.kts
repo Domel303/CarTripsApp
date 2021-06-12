@@ -32,33 +32,33 @@ dependencies {
 
 
 }
-//tasks.register<com.github.gradle.node.npm.task.NpmTask>("appNpmInstall") {
-//    description = "Installs all dependencies from package.json"
-//    workingDir.set(file("${project.projectDir}/src/main/web"))
-//    args.set(listOf("install"))
-//}
-//tasks.register<com.github.gradle.node.npm.task.NpmTask>("appNpmBuild") {
-//    dependsOn("appNpmInstall")
-//    description = "Builds project"
-//    workingDir.set(file("${project.projectDir}/src/main/web"))
-//    args.set(listOf("run", "build"))
-//}
-//tasks.register<Copy>("copyWebApp") {
-//    dependsOn("appNpmBuild")
-//    description = "Copies built project to where it will be served"
-//    from("src/main/web/build")
-//    into("build/resources/main/static/.")
-//}
-//node {
-//    download.set(true)
-//    version.set("12.18.3")
-//    npmVersion.set("")
-//    workDir.set(file("${project.buildDir}/nodejs"))
-//    npmWorkDir.set(file("${project.buildDir}/npm"))
-//}
-//tasks.withType<JavaCompile> {
-//    dependsOn("copyWebApp")
-//}
-//tasks.withType<Test> {
-//    useJUnitPlatform()
-//}
+tasks.register<com.github.gradle.node.npm.task.NpmTask>("appNpmInstall") {
+    description = "Installs all dependencies from package.json"
+    workingDir.set(file("${project.projectDir}/src/main/web"))
+    args.set(listOf("install"))
+}
+tasks.register<com.github.gradle.node.npm.task.NpmTask>("appNpmBuild") {
+    dependsOn("appNpmInstall")
+    description = "Builds project"
+    workingDir.set(file("${project.projectDir}/src/main/web"))
+    args.set(listOf("run", "build"))
+}
+tasks.register<Copy>("copyWebApp") {
+    dependsOn("appNpmBuild")
+    description = "Copies built project to where it will be served"
+    from("src/main/web/build")
+    into("build/resources/main/static/.")
+}
+node {
+    download.set(true)
+    version.set("12.18.3")
+    npmVersion.set("")
+    workDir.set(file("${project.buildDir}/nodejs"))
+    npmWorkDir.set(file("${project.buildDir}/npm"))
+}
+tasks.withType<JavaCompile> {
+    dependsOn("copyWebApp")
+}
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
