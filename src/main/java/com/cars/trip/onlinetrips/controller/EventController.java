@@ -58,11 +58,13 @@ public class EventController {
 
 
     @DeleteMapping(path = "/{eventId}")
-    public void deleteCar(@PathVariable("eventId") Long id) {
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void deleteEvent(@PathVariable("eventId") Long id) {
         eventService.deleteEvent(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateEvent(@RequestBody AppEventDTO event) {
         eventService.updateEvent(event.getId(), event.getStart(), event.getDestination(), event.getCarCulture(), event.getDistance(), event.getDuration(), event.getDateOfEvent(), event.getDescription());
     }
