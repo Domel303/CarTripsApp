@@ -53,6 +53,7 @@ public class CarController {
     }
 
     @DeleteMapping(path = "/{carId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteCar(@PathVariable("carId") Long id) {
         carService.deleteCar(id);
     }

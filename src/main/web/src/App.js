@@ -25,8 +25,10 @@ function App() {
                         <Route path='/' exact={true} component={Home}/>
                         <Route path='/home' exact={true} component={Home}/>
                         <Route path='/profile' exact={true} component={Profile}/>
-                        <Route path='/eventFormular/:id' exaxt={true} component={EventForm}/>
-                        <Route path='/carFormular/:id' exaxt={true} component={CarForm}/>
+                        <Route path='/eventFormular/edit/:id' exaxt={true} component={EventForm}/>
+                        <Route path='/eventFormular/add' exaxt={true} component={EventForm}/>
+                        <Route path='/carFormular/edit/:id' exaxt={true} component={CarForm}/>
+                        <Route path='/carFormular/add' exaxt={true} component={CarForm}/>
                         <Route path='/userList' exaxt={true} component={UserList}/>
                         <Route path='/carList' exaxt={true} component={CarList}/>
                         <Route path='/signin' exact={true} component={Login}/>

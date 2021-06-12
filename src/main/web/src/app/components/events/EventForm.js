@@ -8,15 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const EventForm = () => {
 
-    const [newItem, setNewItem] = useState({
-        start: undefined,
-        destination: undefined,
-        carCulture: undefined,
-        distance: undefined,
-        duration: undefined,
-        dateOfEvent: undefined,
-        description: undefined
-    });
+    const [newItem, setNewItem] = useState({});
     const {id} = useParams()
 
     const [startDate, setStartDate] = useState(new Date());
@@ -30,7 +22,7 @@ const EventForm = () => {
                 console.log(response.data)
                 setNewItem(response.data)
             })
-    }, [id]);
+    }, []);
 
     const onNewItem = (event) => {
         event.preventDefault()
@@ -59,7 +51,7 @@ const EventForm = () => {
                 <Form onSubmit={(event) => {
                     onNewItem(event)
                 }}>
-                    <Input placeholder="start" name='start' onChange={(event) => {
+                    <Input placeholder="start" value={newItem?.start||""} name='start' onChange={(event) => {
                         changeValue(event)
                     }}/>
                     <Input placeholder="destination" name='destination' onChange={(event) => {
