@@ -12,9 +12,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class UserPrinciple implements UserDetails {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Long id;
+    private Long id;
 
     private String username;
 
@@ -25,8 +25,8 @@ public class UserPrinciple implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(Long id, String username, String email, String password, 
-			    		Collection<? extends GrantedAuthority> authorities) {
+    public UserPrinciple(Long id, String username, String email, String password,
+                         Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -95,7 +95,7 @@ public class UserPrinciple implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        
+
         UserPrinciple user = (UserPrinciple) o;
         return Objects.equals(id, user.id);
     }

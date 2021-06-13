@@ -16,21 +16,21 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    public Car getCar(String userName){
-        User user = userRepository.findByUsername(userName).orElseThrow(()-> new IllegalStateException("User " + userName+ "could not be found"));
+    public Car getCar(String userName) {
+        User user = userRepository.findByUsername(userName).orElseThrow(() -> new IllegalStateException("User " + userName + "could not be found"));
         return user.getCar();
     }
 
-    public User getUserByUsername(String userName){
-        return userRepository.findByUsername(userName).orElseThrow(()-> new IllegalStateException("User " + userName+ "could not be found"));
+    public User getUserByUsername(String userName) {
+        return userRepository.findByUsername(userName).orElseThrow(() -> new IllegalStateException("User " + userName + "could not be found"));
     }
 
     @Override
     public Page<User> getAllUsers(int page, int size) {
-        if (!(page < 0 ||size <= 0)){
-            PageRequest onPage= PageRequest.of(page, size);
+        if (!(page < 0 || size <= 0)) {
+            PageRequest onPage = PageRequest.of(page, size);
             return userRepository.findAll(onPage);
-        }else{
+        } else {
             return Page.empty();
         }
     }

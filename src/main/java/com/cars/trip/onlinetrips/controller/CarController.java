@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 
-
-
 @RestController
 @RequestMapping("/api/cars")
 public class CarController {
@@ -29,11 +27,11 @@ public class CarController {
     @GetMapping(path = "/")
     public Page<Car> getAllCars(@RequestParam(required = false) int page,
                                 @RequestParam(required = false) int size) {
-        return carService.getAllCars(page,size);
+        return carService.getAllCars(page, size);
     }
 
     @GetMapping(path = "/car/{id}")
-    public Car getCar(@PathVariable("id") Long id){
+    public Car getCar(@PathVariable("id") Long id) {
         return carService.getCar(id);
     }
 
@@ -41,8 +39,8 @@ public class CarController {
     public Car createNewCar(@RequestBody CarsDTO userCarDTO) {
         Object principles = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user;
-        if(principles instanceof UserPrinciple)
-            user = userRepository.findByUsername(((UserPrinciple)principles).getUsername()).orElseThrow(() -> new IllegalStateException("User with name" + userCarDTO.getUser() + "could not be found"));
+        if (principles instanceof UserPrinciple)
+            user = userRepository.findByUsername(((UserPrinciple) principles).getUsername()).orElseThrow(() -> new IllegalStateException("User with name" + userCarDTO.getUser() + "could not be found"));
         else
             user = userRepository.findByUsername(principles.toString()).orElseThrow(() -> new IllegalStateException("User with name " + principles.toString() + "could not be found"));
         userCarDTO.setUser(user);

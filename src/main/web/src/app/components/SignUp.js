@@ -77,8 +77,8 @@ function SignUp() {
                                onChange={(e) => {
                                    changeValueHandler(e.target.name, e.target.value)
                                }}/>
-                        {user?.username?.length < 5 && (
-                            <Alert variant="danger">Username at least 5 characters.</Alert>)}
+                        {user?.username?.length < 3 && (
+                            <Alert variant="danger">Username at least 3 characters.</Alert>)}
                     </FormGroup>
 
                     <FormGroup style={{"margin-top": "1em"}} controlId="formEmail">

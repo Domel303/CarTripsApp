@@ -1,7 +1,6 @@
 package com.cars.trip.onlinetrips.authentication.message.request;
 
 
-
 public class LoginForm {
 
     private String username;

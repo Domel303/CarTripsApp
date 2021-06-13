@@ -25,10 +25,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Page<Car> getAllCars(int page, int size) {
-        if (!(page < 0 ||size <= 0)){
-            PageRequest onPage= PageRequest.of(page, size);
+        if (!(page < 0 || size <= 0)) {
+            PageRequest onPage = PageRequest.of(page, size);
             return carRepository.findAll(onPage);
-        }else{
+        } else {
             return Page.empty();
         }
     }
@@ -83,8 +83,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car getCar(Long id){
-        return carRepository.findById(id).orElseThrow(() -> new IllegalStateException("Car with id "+ id+ "could not be found"));
+    public Car getCar(Long id) {
+        return carRepository.findById(id).orElseThrow(() -> new IllegalStateException("Car with id " + id + "could not be found"));
     }
 
 }

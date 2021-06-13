@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping("/car")
-    public Car getMyCar(){
+    public Car getMyCar() {
         UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userService.getCar(principles.getUsername());
     }
@@ -34,7 +34,6 @@ public class UserController {
     public Car getUserCar(@PathVariable("userName") String userName) {
         return userService.getCar(userName);
     }
-
 
 
 }

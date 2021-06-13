@@ -5,7 +5,7 @@ import java.util.Set;
 public class SignUpForm {
 
     private String firstname;
-    
+
 
     private String lastname;
 
@@ -14,9 +14,9 @@ public class SignUpForm {
 
 
     private String email;
-    
+
     private Set<String> role;
-    
+
 
     private String password;
 
@@ -27,7 +27,7 @@ public class SignUpForm {
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
-    
+
     public String getLastname() {
         return lastname;
     }
@@ -59,12 +59,12 @@ public class SignUpForm {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public Set<String> getRole() {
-    	return this.role;
+        return this.role;
     }
-    
+
     public void setRole(Set<String> role) {
-    	this.role = role;
+        this.role = role;
     }
 }
