@@ -43,7 +43,7 @@ public class EventServiceImpl implements EventService {
         eventRepository.save(event);
     }
 
-    private AppEvent mapEventDTOToEvent(AppEventDTO eventDTO) {
+    public AppEvent mapEventDTOToEvent(AppEventDTO eventDTO) {
         AppEvent event = new AppEvent();
         event.setSingedUsers(eventDTO.getSingedUsers());
         event.setStart(eventDTO.getStart());
