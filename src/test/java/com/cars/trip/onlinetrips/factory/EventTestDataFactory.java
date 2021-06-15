@@ -14,9 +14,8 @@ public class EventTestDataFactory {
     @Autowired
     private EventRepository eventRepository;
 
-    public AppEvent addEvent(){
+    public AppEvent addEvent(Date date){
         AppEvent event = new AppEvent();
-        Date date = new Date();
         event.setSingedUsers(List.of(new User("name",
                 "lastname",
                 "username",
