@@ -1,5 +1,6 @@
-package com.cars.trip.onlinetrips.authentication.controller;
+package com.cars.trip.onlinetrips.controller;
 
+import com.cars.trip.onlinetrips.OnlineTripsApplication;
 import com.cars.trip.onlinetrips.authentication.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(classes = OnlineTripsApplication.class)
 @AutoConfigureMockMvc
 class AuthRestAPIsTest {
 
@@ -28,12 +29,12 @@ class AuthRestAPIsTest {
 
     @Test
     void authenticateUser() {
-        //controller unit test
+        //com.cars.trip.onlinetrips.controller unit test
 
     }
 
     @Test
     void authenticateUserWrongCredentials(){
-        //controller unit test
+        //com.cars.trip.onlinetrips.controller unit test
     }
 }

@@ -3,7 +3,6 @@ package com.cars.trip.onlinetrips.service;
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
-import com.cars.trip.onlinetrips.factory.Creator;
 import com.cars.trip.onlinetrips.factory.EventTestDataFactory;
 import com.cars.trip.onlinetrips.repository.EventRepository;
 import org.junit.jupiter.api.Assertions;

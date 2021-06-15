@@ -14,10 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.lang.reflect.Field;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class Creator {
@@ -62,25 +59,20 @@ public class Creator {
                     Object propValue = FieldUtils.readField(field, entity);
                     boolean id = fieldHasAnnotation(field, Id.class);
 
-                    if (propValue == null && !id) {
+                    if(id) propValue = new Random().nextLong();
+
+                    if ((propValue == null || (propValue instanceof String && (((String) propValue).length() == 0))) && !id) {
                         Class<?> fieldClass = field.getType();
                         if (fieldClass.isAssignableFrom(String.class)) {
-                            propValue = "Test " + field.getName() + Double.toString(Math.random());
+                            propValue = "Test " + field.getName();
                         } else {
                             if (Date.class.equals(fieldClass)) {
                                 propValue = new Date(System.currentTimeMillis());
                             } else if (Long.class.equals(fieldClass)){
                                 propValue = 1L;
-                            }else if (Set.class.equals(fieldClass)){
+                            } else if (Set.class.equals(fieldClass)) {
                                 propValue = new HashSet<>();
-                            }else if (Boolean.class.equals(fieldClass)){
-                                propValue=true;
-                            }else if (Integer.class.equals(fieldClass)){
-                                propValue=1 + (int)(Math.random() * 50000);
-                            }else if (Double.class.equals(fieldClass)){
-                                propValue=Math.random();
-                            }
-                            else {
+                            } else {
                                 propValue = fieldClass.newInstance();
                             }
                         }
@@ -89,7 +81,7 @@ public class Creator {
                     }
                     saveChildEntity(propValue);
                 } catch (IllegalAccessException e) {
-                    log.info("Skipping " + field.getName() + ", probably private");
+                    log.info("Skipping " + field.getName() + ", as it is probably private");
                 }
             }
 
@@ -104,7 +96,7 @@ public class Creator {
             }
             dao.save(entity);
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            throw new IllegalStateException("Problem", e);
         }
         return entity;
 

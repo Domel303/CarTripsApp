@@ -1,4 +1,4 @@
-package com.cars.trip.onlinetrips.authentication.controller;
+package com.cars.trip.onlinetrips.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;

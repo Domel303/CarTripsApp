@@ -5,8 +5,6 @@ import com.cars.trip.onlinetrips.entity.Car;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public interface CarService {
 

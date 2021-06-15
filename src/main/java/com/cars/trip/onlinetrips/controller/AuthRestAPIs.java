@@ -1,4 +1,4 @@
-package com.cars.trip.onlinetrips.authentication.controller;
+package com.cars.trip.onlinetrips.controller;
 
 
 import com.cars.trip.onlinetrips.authentication.message.request.LoginForm;
