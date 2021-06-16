@@ -78,6 +78,13 @@ public class EventController {
         eventService.saveEvent(event);
     }
 
+    public void registerIntoEventTest(Long id, String userName) {
+        User user = userService.getUserByUsername(userName);
+        AppEvent event = eventService.getEvent(id);
+        event.getSingedUsers().add(user);
+        eventService.saveEvent(event);
+    }
+
     @PostMapping("/unregister")
     public void unregisterFromEvent(@RequestParam Long id) {
         UserPrinciple principles = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

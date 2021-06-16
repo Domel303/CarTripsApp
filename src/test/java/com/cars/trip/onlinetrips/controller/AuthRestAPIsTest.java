@@ -2,7 +2,7 @@ package com.cars.trip.onlinetrips.controller;
 
 import com.cars.trip.onlinetrips.OnlineTripsApplication;
 import com.cars.trip.onlinetrips.authentication.message.request.LoginForm;
-import com.cars.trip.onlinetrips.repository.EventRepository;
+import com.cars.trip.onlinetrips.repository.AppEventRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ class AuthRestAPIsTest {
     ObjectMapper objectMapper;
 
     @MockBean
-    EventRepository eventRepository;
+    AppEventRepository appEventRepository;
 
     @BeforeEach
     public void setMockMvc(){

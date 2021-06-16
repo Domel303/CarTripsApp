@@ -3,7 +3,7 @@ package com.cars.trip.onlinetrips.service;
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
-import com.cars.trip.onlinetrips.repository.EventRepository;
+import com.cars.trip.onlinetrips.repository.AppEventRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,17 +16,17 @@ import java.util.Objects;
 @Service
 public class EventServiceImpl implements EventService {
 
-    private final EventRepository eventRepository;
+    private final AppEventRepository appEventRepository;
 
-    public EventServiceImpl(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
+    public EventServiceImpl(AppEventRepository appEventRepository) {
+        this.appEventRepository = appEventRepository;
     }
 
     @Override
     public Page<AppEvent> getAllEvents(int page, int size) {
         if (!(page < 0 || size <= 0)) {
             PageRequest onPage = PageRequest.of(page, size);
-            return eventRepository.findAll(onPage);
+            return appEventRepository.findAll(onPage);
         } else {
             return Page.empty();
         }
@@ -35,12 +35,12 @@ public class EventServiceImpl implements EventService {
     @Override
     public AppEvent saveEvent(AppEventDTO eventDTO) {
         AppEvent event = mapEventDTOToEvent(eventDTO);
-        return eventRepository.save(event);
+        return appEventRepository.save(event);
     }
 
     @Override
     public void saveEvent(AppEvent event) {
-        eventRepository.save(event);
+        appEventRepository.save(event);
     }
 
     public AppEvent mapEventDTOToEvent(AppEventDTO eventDTO) {
@@ -59,12 +59,12 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<AppEvent> getUsersEvents(User user) {
-        return eventRepository.findAllBySingedUsers(user);
+        return appEventRepository.findAllBySingedUsers(user);
     }
 
     @Override
     public List<User> getEventsUsers(Long id) {
-        AppEvent event = eventRepository.findById(id).
+        AppEvent event = appEventRepository.findById(id).
                 orElseThrow(() -> new IllegalStateException("Event with id" + id + " could not be found"));
 
         return event.getSingedUsers();
@@ -72,11 +72,11 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void deleteEvent(Long id) {
-        boolean exist = eventRepository.existsById(id);
+        boolean exist = appEventRepository.existsById(id);
         if (!exist) {
             throw new IllegalStateException("Event with id" + id + "does not exists");
         }
-        eventRepository.deleteById(id);
+        appEventRepository.deleteById(id);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class EventServiceImpl implements EventService {
                             Date dateOfEvent,
                             String description) {
 
-        AppEvent event = eventRepository.
+        AppEvent event = appEventRepository.
                 findById(eventId).
                 orElseThrow(() -> new IllegalStateException("Event with id" + eventId + " could not be found"));
 
@@ -125,6 +125,6 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public AppEvent getEvent(Long id) {
-        return eventRepository.findById(id).orElseThrow(() -> new IllegalStateException("Event with id " + id + "could not be found"));
+        return appEventRepository.findById(id).orElseThrow(() -> new IllegalStateException("Event with id " + id + "could not be found"));
     }
 }

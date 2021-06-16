@@ -3,7 +3,7 @@ package com.cars.trip.onlinetrips.service;
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
-import com.cars.trip.onlinetrips.repository.EventRepository;
+import com.cars.trip.onlinetrips.repository.AppEventRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ class EventServiceImplTest {
     EventServiceImpl eventService;
 
     @Autowired
-    EventRepository eventRepository;
+    AppEventRepository appEventRepository;
 
     @Test
     void mapEventDTOToEvent() {
@@ -88,11 +88,11 @@ class EventServiceImplTest {
         oldEvent.setDateOfEvent(date);
         oldEvent.setDescription("Description");
 
-        eventRepository.save(oldEvent);
+        appEventRepository.save(oldEvent);
 
         User user = oldEvent.getSingedUsers().get(0);
 
-        List<AppEvent> fromDatabase = eventRepository.findAllBySingedUsers(user);
+        List<AppEvent> fromDatabase = appEventRepository.findAllBySingedUsers(user);
 
         eventService.updateEvent(fromDatabase.get(0).getId(),
                 "NewStart",
@@ -103,7 +103,7 @@ class EventServiceImplTest {
                 null,
                 "NewDescription");
 
-        List<AppEvent> updatedFromDatabase = eventRepository.findAllBySingedUsers(user);
+        List<AppEvent> updatedFromDatabase = appEventRepository.findAllBySingedUsers(user);
         AppEvent actual = updatedFromDatabase.get(0);
 
         Assertions.assertEquals("NewStart", actual.getStart());
