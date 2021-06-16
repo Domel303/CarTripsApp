@@ -41,6 +41,14 @@ public class Car {
         this.enginePowerKW = enginePowerKW;
     }
 
+    public Car( String carBrand, String carModel, String countryOfOrigin, String enginePowerKW, User user) {
+        this.carBrand = carBrand;
+        this.carModel = carModel;
+        this.countryOfOrigin = countryOfOrigin;
+        this.enginePowerKW = enginePowerKW;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

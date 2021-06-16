@@ -1,5 +1,7 @@
 package com.cars.trip.onlinetrips.factory;
 
+import com.cars.trip.onlinetrips.authentication.model.User;
+import com.cars.trip.onlinetrips.entity.Car;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.logging.Log;
@@ -72,8 +74,11 @@ public class Creator {
                                 propValue = 1L;
                             } else if (Set.class.equals(fieldClass)) {
                                 propValue = new HashSet<>();
-                            } else {
+                            } else if (Car.class.equals(fieldClass)){
+                                continue;
+                            }else{
                                 propValue = fieldClass.newInstance();
+
                             }
                         }
                         PropertyUtils.setProperty(entity, field.getName(), propValue);
@@ -117,7 +122,7 @@ public class Creator {
         if (propValue != null) {
             Class<?> valueClass = propValue.getClass();
             final boolean isEntity = isEntity(valueClass);
-            if ((isEntity)) {
+            if ((isEntity) && !valueClass.equals(User.class)) {
 
                 saveEntity(propValue);
                 String className = propValue.getClass().getSimpleName();

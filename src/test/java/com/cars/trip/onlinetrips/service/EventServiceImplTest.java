@@ -72,7 +72,6 @@ class EventServiceImplTest {
 
     @Test
     void saveChangedAtributesToEvent() {
-        //unit test logika
         Date date = new Date();
 
         AppEvent oldEvent = new AppEvent();
