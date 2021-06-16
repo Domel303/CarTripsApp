@@ -78,8 +78,7 @@ public class EventController {
         eventService.saveEvent(event);
     }
 
-    public void registerIntoEventTest(Long id, String userName) {
-        User user = userService.getUserByUsername(userName);
+    public void registerIntoEventTest(Long id, User user) {
         AppEvent event = eventService.getEvent(id);
         event.getSingedUsers().add(user);
         eventService.saveEvent(event);

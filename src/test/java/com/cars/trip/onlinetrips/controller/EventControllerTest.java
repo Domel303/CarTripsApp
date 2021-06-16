@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Date;
 import java.util.List;
@@ -37,7 +36,10 @@ class EventControllerTest {
     void registerIntoEvent() {
         Date date = new Date();
         User user = new User("name1","lastname1","username1","email@email.com","password");
-        user.setRoles(Set.of(new Role(RoleName.ROLE_ADMIN)));
+        Role role = new Role(RoleName.ROLE_ADMIN);
+        role.setId(1L);
+        user.setRoles(Set.of(role));
+
         AppEvent event = new AppEvent();
         event.setSingedUsers(List.of(user));
         event.setStart("Start");
@@ -50,7 +52,7 @@ class EventControllerTest {
 
         AppEvent databaseEvent = (AppEvent) creator.saveEntity(event);
 
-        eventController.registerIntoEventTest(databaseEvent.getId(),"Dominik");
+        eventController.registerIntoEventTest(databaseEvent.getId(),user);
         AppEvent finalEvent = appEventRepository.findById(databaseEvent.getId()).orElseThrow();
 
         Assertions.assertEquals(finalEvent.getSingedUsers().size(), 2);
