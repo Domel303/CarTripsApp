@@ -1,7 +1,9 @@
 package com.cars.trip.onlinetrips.controller;
 
 import com.cars.trip.onlinetrips.OnlineTripsApplication;
+import com.cars.trip.onlinetrips.authentication.message.request.LoginForm;
 import com.cars.trip.onlinetrips.repository.EventRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ class AuthRestAPIsTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
     @MockBean
     EventRepository eventRepository;
 
@@ -35,10 +40,11 @@ class AuthRestAPIsTest {
     @Test
     public void logInSuccesfully() throws Exception {
 
-//return unauthorized
-        
+        LoginForm loginCredentials = new LoginForm();
+        loginCredentials.setUsername("Dominik");
+        loginCredentials.setPassword("123456789");
         MvcResult response = mockMvc.perform(post("/api/auth/signin")
-                .content("{\"username\":\"Dominik\",\"password\":\"123456789\"}")
+                .content(objectMapper.writeValueAsString(loginCredentials))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn();
 
@@ -49,9 +55,12 @@ class AuthRestAPIsTest {
     @Test
     public void logInUnSuccesfully() throws Exception {
 
+        LoginForm loginCredentials = new LoginForm();
+        loginCredentials.setUsername("Stranger");
+        loginCredentials.setPassword("123456789");
 
         MvcResult response = mockMvc.perform(post("/api/auth/signin")
-                .content("{\"username\":\"Stranger\",\"password\":\"123456789\"}")
+                .content(objectMapper.writeValueAsString(loginCredentials))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn();
 
