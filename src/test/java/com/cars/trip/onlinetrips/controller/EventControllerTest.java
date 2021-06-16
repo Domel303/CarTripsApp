@@ -37,7 +37,7 @@ class EventControllerTest {
         Date date = new Date();
         User user = new User("name1","lastname1","username1","email@email.com","password");
         Role role = new Role(RoleName.ROLE_ADMIN);
-        role.setId(1L);
+        role.setId(2L);
         user.setRoles(Set.of(role));
 
         AppEvent event = new AppEvent();

@@ -58,8 +58,8 @@ public class AuthenticationTest {
 
     @BeforeAll
     public static void setupWebdriverChromeDriver() {
-        String chromedriverPath = AuthenticationTest.class.getResource("/chromedriver.exe").getFile();
-        System.setProperty("webdriver.chrome.driver", chromedriverPath );
+//        String chromedriverPath = AuthenticationTest.class.getResource("/chromedriver.exe").getFile();
+//        System.setProperty("webdriver.chrome.driver", chromedriverPath );
     }
 
     @BeforeEach
