@@ -104,7 +104,7 @@ public class CarFormularTest {
     }
 
     private void putToForm(final String expected) {
-        driver.get(String.format("http://localhost:%s/#/interestpoint/add", port));
+        driver.get(String.format("http://localhost:%s/#/carFormular/add", port));
         driver.findElement(By.name("carBrand")).sendKeys(expected);
         driver.findElement(By.name("carModel")).sendKeys(expected);
         driver.findElement(By.name("countryOfOrigin")).sendKeys(expected);

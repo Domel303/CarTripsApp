@@ -62,7 +62,7 @@ class AuthRestAPIsTest {
         MvcResult response = mockMvc.perform(post("/api/auth/signin")
                 .content(objectMapper.writeValueAsString(loginCredentials))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andReturn();
+                .andExpect(status().is4xxClientError()).andReturn();
 
         String result =response.getResponse().getContentAsString();
         assertFalse(result.contains("accessToken"));

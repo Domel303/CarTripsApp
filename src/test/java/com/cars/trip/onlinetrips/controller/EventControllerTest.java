@@ -1,6 +1,5 @@
 package com.cars.trip.onlinetrips.controller;
 
-import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.authentication.repository.UserRepository;
 import com.cars.trip.onlinetrips.entity.AppEvent;
 import com.cars.trip.onlinetrips.factory.Creator;
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 class EventControllerTest {
 
@@ -34,8 +32,6 @@ class EventControllerTest {
 
     @Test
     void registerIntoEvent() {
-        //integrační test
-
         Date date = new Date();
         AppEvent event = new AppEvent();
         event.setSingedUsers(List.of());
