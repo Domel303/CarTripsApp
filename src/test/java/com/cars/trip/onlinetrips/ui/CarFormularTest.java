@@ -50,8 +50,12 @@ public class CarFormularTest {
 
     @BeforeAll
     public static void setupWebdriverChromeDriver() {
-        String chromedriverPath = AuthenticationTest.class.getResource("/chromedriver.exe").getFile();
-        System.setProperty("webdriver.chrome.driver", chromedriverPath );
+        try {
+            String chromedriverPath = AuthenticationTest.class.getResource("/chromedriver.exe").getFile();
+            System.setProperty("webdriver.chrome.driver", chromedriverPath);
+        } catch (NullPointerException e) {
+            System.out.println("chromedriver is on linux server without .exe");
+        }
     }
 
     @BeforeEach
@@ -86,12 +90,12 @@ public class CarFormularTest {
         driver.findElement(By.cssSelector("input[name=\"password\"]")).sendKeys(password);
         driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
 
-        WebDriverWait wt = new WebDriverWait(driver,timeout);
+        WebDriverWait wt = new WebDriverWait(driver, timeout);
         wt.until(ExpectedConditions.urlContains("#/profile"));
     }
 
     @Test
-    public void putToForm(){
+    public void putToForm() {
         final String EXPECTED = "TEST";
         signIn(CORRECT_USER, CORRECT_PASSWORD, RESPONSE_TIMEOUT);
 

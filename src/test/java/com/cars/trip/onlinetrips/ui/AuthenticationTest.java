@@ -58,8 +58,13 @@ public class AuthenticationTest {
 
     @BeforeAll
     public static void setupWebdriverChromeDriver() {
-//        String chromedriverPath = AuthenticationTest.class.getResource("/chromedriver.exe").getFile();
-//        System.setProperty("webdriver.chrome.driver", chromedriverPath );
+        try {
+            String chromedriverPath = AuthenticationTest.class.getResource("/chromedriver.exe").getFile();
+            System.setProperty("webdriver.chrome.driver", chromedriverPath);
+        }catch(NullPointerException e){
+            System.out.println("chromedriver is on linux server without .exe");
+        }
+
     }
 
     @BeforeEach
@@ -109,9 +114,9 @@ public class AuthenticationTest {
         driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
 
         WebDriverWait wait = new WebDriverWait(driver, AuthenticationTest.RESPONSE_TIMEOUT);
-        if (!expectFail){
+        if (!expectFail) {
             wait.until(ExpectedConditions.urlContains("#/profile"));
-        }else{
+        } else {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div [role='alert']")));
         }
     }
