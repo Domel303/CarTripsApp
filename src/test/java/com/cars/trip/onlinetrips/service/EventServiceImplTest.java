@@ -3,7 +3,6 @@ package com.cars.trip.onlinetrips.service;
 import com.cars.trip.onlinetrips.authentication.model.User;
 import com.cars.trip.onlinetrips.dto.AppEventDTO;
 import com.cars.trip.onlinetrips.entity.AppEvent;
-import com.cars.trip.onlinetrips.factory.EventTestDataFactory;
 import com.cars.trip.onlinetrips.repository.EventRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,20 +17,17 @@ import java.util.List;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.AUTO_CONFIGURED)
 class EventServiceImplTest {
 
-    //předělat na groovy testy
     @Autowired
     EventServiceImpl eventService;
 
-    EventTestDataFactory dataFactory;
+    @Autowired
+    EventRepository eventRepository;
 
     @Test
     void mapEventDTOToEvent() {
-    //unit test logika
         Date date = new Date();
 
-        AppEvent expected = dataFactory.addEvent(date);
-
-        AppEventDTO eventDto = new AppEventDTO();
+        AppEvent expected = new AppEvent();
         expected.setSingedUsers(List.of(new User("name",
                 "lastname",
                 "username",
@@ -45,27 +41,78 @@ class EventServiceImplTest {
         expected.setDateOfEvent(date);
         expected.setDescription("Description");
 
+        AppEventDTO eventDto = new AppEventDTO();
+        eventDto.setSingedUsers(List.of(new User("name",
+                "lastname",
+                "username",
+                "email",
+                "password")));
+        eventDto.setStart("Start");
+        eventDto.setDestination("Destination");
+        eventDto.setCarCulture("CarCulture");
+        eventDto.setDistance("Distance");
+        eventDto.setDuration("Duration");
+        eventDto.setDateOfEvent(date);
+        eventDto.setDescription("Description");
+
         AppEvent actual = eventService.mapEventDTOToEvent(eventDto);
 
-        Assertions.assertEquals(expected, actual);
+
+        Assertions.assertEquals(expected.getSingedUsers().get(0).getUsername(), actual.getSingedUsers().get(0).getUsername());
+        Assertions.assertEquals(expected.getStart(), actual.getStart());
+        Assertions.assertEquals(expected.getDestination(), actual.getDestination());
+        Assertions.assertEquals(expected.getCarCulture(), actual.getCarCulture());
+        Assertions.assertEquals(expected.getDistance(), actual.getDistance());
+        Assertions.assertEquals(expected.getDuration(), actual.getDuration());
+        Assertions.assertEquals(expected.getDateOfEvent(), actual.getDateOfEvent());
+        Assertions.assertEquals(expected.getDescription(), actual.getDescription());
     }
 
-    @Autowired
-    EventRepository eventRepository;
+
 
     @Test
-    void saveChangedAtributesToEvent(){
+    void saveChangedAtributesToEvent() {
         //unit test logika
-        //update eventu
+        Date date = new Date();
 
-        AppEvent event = new AppEvent();
-        eventRepository.save(event);
+        AppEvent oldEvent = new AppEvent();
+        oldEvent.setSingedUsers(List.of(new User("name",
+                "lastname",
+                "username",
+                "email",
+                "password")));
+        oldEvent.setStart("Start");
+        oldEvent.setDestination("Destination");
+        oldEvent.setCarCulture("CarCulture");
+        oldEvent.setDistance("Distance");
+        oldEvent.setDuration("Duration");
+        oldEvent.setDateOfEvent(date);
+        oldEvent.setDescription("Description");
 
-        //update event
+        eventRepository.save(oldEvent);
 
-        //
+        User user = oldEvent.getSingedUsers().get(0);
 
-        //assertEquals
+        List<AppEvent> fromDatabase = eventRepository.findAllBySingedUsers(user);
+
+        eventService.updateEvent(fromDatabase.get(0).getId(),
+                "NewStart",
+                "NewDestination",
+                "NewCarCulture",
+                "NewDistance",
+                "NewDuration",
+                null,
+                "NewDescription");
+
+        List<AppEvent> updatedFromDatabase = eventRepository.findAllBySingedUsers(user);
+        AppEvent actual = updatedFromDatabase.get(0);
+
+        Assertions.assertEquals("NewStart", actual.getStart());
+        Assertions.assertEquals("NewDestination", actual.getDestination());
+        Assertions.assertEquals("NewCarCulture", actual.getCarCulture());
+        Assertions.assertEquals("NewDistance", actual.getDistance());
+        Assertions.assertEquals("NewDuration", actual.getDuration());
+        Assertions.assertEquals("NewDescription", actual.getDescription());
 
     }
 

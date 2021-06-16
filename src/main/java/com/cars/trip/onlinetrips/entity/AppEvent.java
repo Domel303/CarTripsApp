@@ -15,7 +15,7 @@ public class AppEvent {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "APP_EVENT_ID_SEQ")
     private Long id;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "SINGED_USERS_INTO_EVENT",
             joinColumns = @JoinColumn(name = "EVENT_ID"),
